@@ -1,0 +1,27 @@
+/* src/App.css */
+.App {
+    text-align: center;
+  }
+  /* src/App.css */
+.Search {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.Search input {
+  padding: 10px;
+  width: 300px;
+  margin-right: 10px;
+}
+
+.Search button {
+  padding: 10px 20px;
+}
+
+.Markdown {
+  margin-top: 20px;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
