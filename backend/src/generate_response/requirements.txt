@@ -1,2 +1,5 @@
 python-dotenv
-boto3
+langchain-openai
+tavily-python
+langgraph
+langchain-core
