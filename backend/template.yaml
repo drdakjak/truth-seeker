@@ -42,18 +42,18 @@ Resources:
       RuntimeManagementConfig:
         UpdateRuntimeOn: Auto
       Events:
-        RestApiPOSTgenerateresponsequery:
+        TruthSeekerRestApiPOSTgenerateresponsequery:
           Type: Api
           Properties:
             Path: /generate_response/{query}
             Method: POST
-            RestApiId: !Ref RestApi
-  RestApi:
+            RestApiId: !Ref TruthSeekerRestApi
+  TruthSeekerRestApi:
     Type: AWS::Serverless::Api
     Properties:
       Name: !Sub
         - ${ResourceName} From Stack ${AWS::StackName}
-        - ResourceName: RestApi
+        - ResourceName: TruthSeekerRestApi
       StageName: Prod
       DefinitionBody:
         openapi: '3.0'

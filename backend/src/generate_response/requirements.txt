@@ -3,3 +3,5 @@ langchain-openai
 tavily-python
 langgraph
 langchain-core
+botocore
+boto3
