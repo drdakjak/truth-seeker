@@ -8,18 +8,20 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
+from config import SECRET_NAME, REGION_NAME
 
 def load_secrets():
 
-    secret_name = "prod/Truth-seeker"
-    region_name = "us-west-2"
-
+    secret_name = SECRET_NAME
+    region_name = REGION_NAME
+    print("Loading secrets client")
     # Create a Secrets Manager client
     session = boto3.session.Session()
     client = session.client(
         service_name='secretsmanager',
         region_name=region_name
     )
+    print("Secrets client loaded")
 
     try:
         get_secret_value_response = client.get_secret_value(

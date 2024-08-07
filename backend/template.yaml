@@ -8,13 +8,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: An AWS Serverless Application Model template describing your function.
 Resources:
-  generateResponse:
+  GenerateResponse:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./src/generate_reponse/
+      CodeUri: ./src/generate_response/
       Description: ''
       MemorySize: 128
-      Timeout: 3
+      Timeout: 900
       Handler: lambda_function.lambda_handler
       Runtime: python3.11
       Architectures:
@@ -36,7 +36,7 @@ Resources:
                 - logs:CreateLogStream
                 - logs:PutLogEvents
               Resource:
-                - arn:aws:logs:us-west-2:360400205813:log-group:/aws/lambda/generateResponse:*
+                - arn:aws:logs:us-west-2:360400205813:log-group:/aws/lambda/GenerateResponse:*
       SnapStart:
         ApplyOn: None
       RuntimeManagementConfig:
@@ -64,15 +64,47 @@ Resources:
               x-amazon-apigateway-integration:
                 httpMethod: POST
                 type: aws_proxy
-                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${generateResponse.Arn}/invocations
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GenerateResponse.Arn}/invocations
+              responses: {}
+          /health:
+            get:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${HealthCheck.Arn}/invocations
               responses: {}
       EndpointConfiguration: REGIONAL
       TracingEnabled: true
       Cors:
         MaxAge: 5
+  HealthCheck:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: HealthCheck
+      CodeUri: ./src/health_check
+      Handler: handler.handler
+      Runtime: python3.11
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Events:
+        TruthSeekerRestApiGEThealth:
+          Type: Api
+          Properties:
+            Path: /health
+            Method: GET
+            RestApiId: !Ref TruthSeekerRestApi
+  HealthCheckLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Retain
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${HealthCheck}
 Metadata:
   AWS::Composer::Groups:
     Group:
       Label: API
       Members:
-        - generateResponse
+        - GenerateResponse
+        - HealthCheck

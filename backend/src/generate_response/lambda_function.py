@@ -1,6 +1,6 @@
 import json
 
-from agents.graph import build_graph
+# from agents.graph import build_graph
 from config import DEBUG_MODE
 
 def lambda_handler(event, context):
@@ -11,7 +11,35 @@ def lambda_handler(event, context):
     # Get the environment variables
     # bucket_name = os.environ['BUCKET_NAME']
     # key = os.environ['KEY']
+    print(DEBUG_MODE)
 
+
+    from load_secrets import load_secrets
+    print("Loading secrets")
+    load_secrets()
+    print("Secrets loaded")
+
+    from clients import get_model, get_tavily
+    print("Getting model")
+    model = get_model()
+    print("Model gotten")
+    print("Getting tavily")
+    tavily = get_tavily()
+    print("Tavily gotten")
+
+
+    if DEBUG_MODE:
+        return {
+        'statusCode': 200,
+        'headers': {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+        },
+        'body': "DEBUG MODE ENABLED"
+        }
+    
     graph = build_graph()
 
     human_input = "Dezinformátorské žně kvůli ukrajinskému obilí. EU přitom nezavádí omezení dovozu kvůli jedům"

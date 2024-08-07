@@ -1,10 +1,10 @@
-from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import StateGraph
 from agents import nodes
 from agents import state
 
 def build_graph():
-    memory = SqliteSaver.from_conn_string(":memory:")
+    checkpointer = MemorySaver()
 
     builder = StateGraph(state.AgentState)
     builder.add_node("planner_node", nodes.plan_node)
@@ -18,5 +18,5 @@ def build_graph():
 
     builder.set_entry_point("planner_node")
 
-    graph = builder.compile(checkpointer=memory)
+    graph = builder.compile(checkpointer=checkpointer)
     return graph
