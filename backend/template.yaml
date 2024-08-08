@@ -7,6 +7,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: An AWS Serverless Application Model template describing your function.
+Parameters:
+  Repository:
+    Type: String
+    Description: The GitHub repository to deploy the frontend to
+
 Resources:
   GenerateResponse:
     Type: AWS::Serverless::Function
@@ -101,6 +106,48 @@ Resources:
     DeletionPolicy: Retain
     Properties:
       LogGroupName: !Sub /aws/lambda/${HealthCheck}
+
+  TruthSeekerAmplifyApp:
+    Type: AWS::Amplify::App
+    Properties:
+      Name: !Sub "${AWS::StackName}-${AWS::Region}-${AWS::AccountId}"
+      Repository: !Ref Repository
+      BuildSpec: |
+        version: 1
+        applications:
+          - frontend:
+              phases:
+                preBuild:
+                  commands:
+                    - npm ci
+                build:
+                  commands:
+                    - npm run build
+              artifacts:
+                baseDirectory: dist
+                files:
+                  - '**/*'
+              cache:
+                paths:
+                  - node_modules/**/*
+            appRoot: frontend
+      AccessToken: "{{resolve:secretsmanager:truth-seeker-github-token}}"
+      EnvironmentVariables:
+        - Name: AMPLIFY_MONOREPO_APP_ROOT
+          Value: frontend
+        - Name: VITE_REGION
+          Value: !Ref AWS::Region
+        - Name: VITE_API_ENDPOINT
+          Value: !Sub "https://${TruthSeekerRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev/"
+
+  AmplifyBranch:
+    Type: AWS::Amplify::Branch
+    Properties:
+      BranchName: main
+      AppId: !GetAtt TruthSeekerAmplifyApp.AppId
+      EnableAutoBuild: true
+
+
 Metadata:
   AWS::Composer::Groups:
     Group:
@@ -108,3 +155,7 @@ Metadata:
       Members:
         - GenerateResponse
         - HealthCheck
+
+Outputs:
+  ApiGatewayBaseUrl:
+    Value: !Sub "https://${TruthSeekerRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev/"
