@@ -4,14 +4,14 @@ import Search from '../../frontend/src/components/Search';
 import './App.css';
 
 console.log(import.meta.env.VITE_API_ENDPOINT)
-console.log(import.meta.env.VITE_API_REGION)
+console.log(import.meta.env.VITE_REGION)
 
 Amplify.configure({
   API: {
     REST: {
       TruthSeekerRestApi:{
         endpoint: import.meta.env.VITE_API_ENDPOINT,
-        region: import.meta.env.VITE_API_REGION,
+        region: import.meta.env.VITE_REGION,
       }
   }
 }
