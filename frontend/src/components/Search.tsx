@@ -10,28 +10,31 @@ const Search: React.FC = () => {
 
   const handleSearch = async () => {
     try {
-      const payload = JSON.stringify({ prompt: input })
-      console.log(payload)
+      // const payload = JSON.stringify({ prompt: input })
+      // console.log("Payload")
+      // console.log(payload)
+      const encodedUriInput = encodeURIComponent(input)
+      console.log(encodedUriInput)
+
+
       console.log("Health Check");
-      
-      const get_body = await get({
+      const health_check = await get({
         apiName: "TruthSeekerRestApi", 
         path: "health",
       }).response;
-      console.log("Health Check");
+      console.log("Health Check finished");
 
-      console.log(get_body);
+      console.log(health_check);
       console.log("Generate Response");
 
       const response = await get({
         apiName: "TruthSeekerRestApi", 
-        path: "generate_response/TODO",
+        path: `generate_response/${encodedUriInput}`,
         options: {
-          body: payload,
-          headers: {'Content-Type': 'application/json'},
+          headers: {'Content-Type': 'application/json'}
         }
       }).response;
-      console.log("Generate Response");
+      console.log("Generate Response finished");
 
       console.log(response.body);
       const data = await response.body.json();
