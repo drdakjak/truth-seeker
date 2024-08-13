@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { generateClient } from 'aws-amplify/api';;
+import { post } from 'aws-amplify/api';;
+
+const client = generateClient();
 
 const Search: React.FC = () => {
   const [input, setInput] = useState('');
@@ -10,14 +14,19 @@ const Search: React.FC = () => {
         body: JSON.stringify({ prompt: input })
       };
 
-      const res = await fetch('https://api.example.com/lambda', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(lambdaPayload)
+      const res = await post({
+        apiName: "TruthSeekerRestApi", 
+        path: "generate_response/TODO"
       });
 
+      // const res = await fetch('https://api.example.com/lambda', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(lambdaPayload)
+      // });
+      console.log(res);
       const data = await res.json();
       setResponse(data.body);
     } catch (error) {

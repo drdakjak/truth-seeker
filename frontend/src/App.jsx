@@ -1,6 +1,19 @@
+import { Amplify } from "aws-amplify";
 import React from 'react';
 import Search from '../../frontend/src/components/Search';
 import './App.css';
+
+Amplify.configure({
+  API: {
+    endpoints: [
+      {
+        name: "TruthSeekerRestApi",
+        endpoint: import.meta.env.VITE_API_ENDPOINT,
+        region: import.meta.env.VITE_API_REGION,
+      },
+    ],
+  },
+});
 
 function App() {
   return (
