@@ -57,9 +57,9 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       Name: !Sub
-        - ${ResourceName} From Stack ${AWS::StackName}
+        - ${ResourceName}
         - ResourceName: TruthSeekerRestApi
-      StageName: Prod
+      StageName: dev
       DefinitionBody:
         openapi: '3.0'
         info: {}

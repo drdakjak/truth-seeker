@@ -27,8 +27,8 @@ const Search: React.FC = () => {
       //   body: JSON.stringify(lambdaPayload)
       // });
       console.log(res);
-      const data = await res.json();
-      setResponse(data.body);
+      const data = await res.response;
+      setResponse(data);
     } catch (error) {
       console.error('Error calling Lambda function:', error);
     }
