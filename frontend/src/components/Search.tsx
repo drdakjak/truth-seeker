@@ -16,7 +16,7 @@ const Search: React.FC = () => {
 
       const body = await post({
         apiName: "TruthSeekerRestApi", 
-        path: "generate_response/TODO",
+        path: "generate_response/TODO/",
         options: {
           headers: {'Content-Type': 'application/json'}
         }
