@@ -47,11 +47,11 @@ Resources:
       RuntimeManagementConfig:
         UpdateRuntimeOn: Auto
       Events:
-        TruthSeekerRestApiPOSTgenerateresponsequery:
+        TruthSeekerRestApiGETgenerateresponsequery:
           Type: Api
           Properties:
             Path: /generate_response/{query}
-            Method: POST
+            Method: GET
             RestApiId: !Ref TruthSeekerRestApi
   TruthSeekerRestApi:
     Type: AWS::Serverless::Api

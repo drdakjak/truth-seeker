@@ -24,7 +24,7 @@ const Search: React.FC = () => {
       console.log(get_body);
       console.log("Generate Response");
 
-      const body = await get({
+      const response = await get({
         apiName: "TruthSeekerRestApi", 
         path: "generate_response/TODO",
         // options: {
@@ -33,15 +33,8 @@ const Search: React.FC = () => {
       }).response;
       console.log("Generate Response");
 
-      // const res = await fetch('https://api.example.com/lambda', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify(lambdaPayload)
-      // });
-      console.log(body);
-      const data = await body.json();
+      console.log(response.body);
+      const data = await response.body.json();
       setResponse(data);
     } catch (error) {
       console.error('Error calling Lambda function:', error);
