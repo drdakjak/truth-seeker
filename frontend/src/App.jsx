@@ -8,14 +8,26 @@ console.log(import.meta.env.VITE_API_REGION)
 
 Amplify.configure({
   API: {
-    endpoints: [
-      {
-        name: "TruthSeekerRestApi",
+    REST: {
+      YourAPIName: {
+        endpoint:
+          'https://abcdefghij1234567890.execute-api.us-east-1.amazonaws.com/stageName',
+        region: 'us-east-1' // Optional
+      }
+    }
+  }
+});
+
+Amplify.configure({
+  API: {
+    REST: {
+      TruthSeekerRestApi:{
         endpoint: import.meta.env.VITE_API_ENDPOINT,
-        region: import.meta.env.VITE_API_REGION,
-      },
-    ],
-  },
+        // region: import.meta.env.VITE_API_REGION,
+        region: 'us-west-2',
+      }
+  }
+}
 });
 
 function App() {

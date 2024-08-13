@@ -136,7 +136,7 @@ Resources:
         - Name: AMPLIFY_MONOREPO_APP_ROOT
           Value: frontend
         - Name: VITE_REGION
-          Value: !Ref AWS::Region
+          Value: !Ref "AWS::Region"
         - Name: VITE_API_ENDPOINT
           Value: !Sub "https://${TruthSeekerRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev/"
 
