@@ -15,24 +15,23 @@ const Search: React.FC = () => {
       };
       console.log("Health Check");
       
-      const body = await get({
+      const get_body = await get({
         apiName: "TruthSeekerRestApi", 
         path: "health",
+      }).response;
+      console.log("Health Check");
+
+      console.log(get_body);
+      console.log("Generate Response");
+
+      const body = await post({
+        apiName: "TruthSeekerRestApi", 
+        path: "generate_response/TODO",
         // options: {
         //   headers: {'Content-Type': 'application/json'},
         // }
       }).response;
-      console.log("Health Check");
-
-      console.log(body);
-
-      // const body = await post({
-      //   apiName: "TruthSeekerRestApi", 
-      //   path: "generate_response/TODO/",
-      //   options: {
-      //     headers: {'Content-Type': 'application/json'},
-      //   }
-      // }).response;
+      console.log("Generate Response");
 
       // const res = await fetch('https://api.example.com/lambda', {
       //   method: 'POST',
