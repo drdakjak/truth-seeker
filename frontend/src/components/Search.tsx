@@ -10,9 +10,8 @@ const Search: React.FC = () => {
 
   const handleSearch = async () => {
     try {
-      const lambdaPayload = {
-        body: JSON.stringify({ prompt: input })
-      };
+      const payload = JSON.stringify({ prompt: input })
+      console.log(payload)
       console.log("Health Check");
       
       const get_body = await get({
@@ -27,9 +26,10 @@ const Search: React.FC = () => {
       const response = await get({
         apiName: "TruthSeekerRestApi", 
         path: "generate_response/TODO",
-        // options: {
-        //   headers: {'Content-Type': 'application/json'},
-        // }
+        options: {
+          body: payload,
+          headers: {'Content-Type': 'application/json'},
+        }
       }).response;
       console.log("Generate Response");
 

@@ -6,8 +6,12 @@ from config import DEBUG_MODE
 def lambda_handler(event, context):
     print("Event: ", event)
     print("Context: ", context)
-    # event_body = json.loads(event["body"])
-    # human_input = event_body["prompt"]
+
+    event_body = json.loads(event["body"])
+    print("event_body: ", event_body)
+
+    human_input = event_body["prompt"]
+    print("human_input: ", human_input)
     # Get the environment variables
     # bucket_name = os.environ['BUCKET_NAME']
     # key = os.environ['KEY']
