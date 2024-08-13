@@ -81,7 +81,9 @@ Resources:
       EndpointConfiguration: REGIONAL
       TracingEnabled: true
       Cors:
-        MaxAge: 5
+        AllowOrigin: "'*'"
+        AllowHeaders: "'*'"
+        AllowMethods: "'*'"
   HealthCheck:
     Type: AWS::Serverless::Function
     Properties:

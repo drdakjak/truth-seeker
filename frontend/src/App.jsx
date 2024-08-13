@@ -11,8 +11,7 @@ Amplify.configure({
     REST: {
       TruthSeekerRestApi:{
         endpoint: import.meta.env.VITE_API_ENDPOINT,
-        // region: import.meta.env.VITE_API_REGION,
-        region: 'us-west-2',
+        region: import.meta.env.VITE_API_REGION,
       }
   }
 }
