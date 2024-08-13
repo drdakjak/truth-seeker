@@ -65,7 +65,7 @@ Resources:
         info: {}
         paths:
           /generate_response/{query}:
-            post:
+            get:
               x-amazon-apigateway-integration:
                 httpMethod: POST
                 type: aws_proxy

@@ -24,7 +24,7 @@ const Search: React.FC = () => {
       console.log(get_body);
       console.log("Generate Response");
 
-      const body = await post({
+      const body = await get({
         apiName: "TruthSeekerRestApi", 
         path: "generate_response/TODO",
         // options: {
