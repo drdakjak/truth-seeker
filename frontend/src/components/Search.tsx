@@ -36,7 +36,7 @@ const Search: React.FC = () => {
       console.log(response.body);
       const data = await response.body.json();
       console.log(data)
-      setResponse(response.body);
+      setResponse(data);
     } catch (error) {
       console.error('Error calling Lambda function:', error);
     }
