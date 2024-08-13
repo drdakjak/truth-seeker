@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { generateClient } from 'aws-amplify/api';;
-import { post } from 'aws-amplify/api';;
+import { post, get } from 'aws-amplify/api';;
 
 const client = generateClient();
 
@@ -13,12 +13,23 @@ const Search: React.FC = () => {
       const lambdaPayload = {
         body: JSON.stringify({ prompt: input })
       };
+      console.log("Health Check");
+      const body = await get({
+        apiName: "TruthSeekerRestApi", 
+        path: "health",
+        // options: {
+        //   headers: {'Content-Type': 'application/json'},
+        // }
+      }).response;
+      console.log("Health Check");
+
+      console.log(body);
 
       const body = await post({
         apiName: "TruthSeekerRestApi", 
         path: "generate_response/TODO/",
         options: {
-          headers: {'Content-Type': 'application/json'}
+          headers: {'Content-Type': 'application/json'},
         }
       }).response;
 
