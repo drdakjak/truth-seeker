@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { generateClient } from 'aws-amplify/api';;
 import { post, get } from 'aws-amplify/api';;
+import ReactMarkdown from 'react-markdown';
 
 const client = generateClient();
 
@@ -55,7 +56,7 @@ const Search: React.FC = () => {
       />
       <button onClick={handleSearch}>Submit</button>
       <div className="Response">
-        {response}
+        {response && <ReactMarkdown>{response}</ReactMarkdown>}
       </div>
     </div>
   );
