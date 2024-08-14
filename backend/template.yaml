@@ -82,8 +82,8 @@ Resources:
       TracingEnabled: true
       Cors:
         AllowOrigin: "'*'"
-        AllowHeaders: "'*'"
-        AllowMethods: "'*'"
+        AllowHeaders: "Content-Type"
+        AllowMethods: "POST, GET"
   HealthCheck:
     Type: AWS::Serverless::Function
     Properties:
@@ -112,7 +112,7 @@ Resources:
   TruthSeekerAmplifyApp:
     Type: AWS::Amplify::App
     Properties:
-      Name: !Sub "${AWS::StackName}-${AWS::Region}-${AWS::AccountId}"
+      Name: !Sub ${AWS::StackName}-${AWS::Region}-${AWS::AccountId}
       Repository: !Ref Repository
       BuildSpec: |
         version: 1
@@ -133,14 +133,14 @@ Resources:
                 paths:
                   - node_modules/**/*
             appRoot: frontend
-      AccessToken: "{{resolve:secretsmanager:truth-seeker-github-token}}"
+      AccessToken: '{{resolve:secretsmanager:truth-seeker-github-token}}'
       EnvironmentVariables:
         - Name: AMPLIFY_MONOREPO_APP_ROOT
           Value: frontend
         - Name: VITE_REGION
           Value: !Ref AWS::Region
         - Name: VITE_API_ENDPOINT
-          Value: !Sub "https://${TruthSeekerRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev/"
+          Value: !Sub https://${TruthSeekerRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev/
 
   AmplifyBranch:
     Type: AWS::Amplify::Branch
@@ -148,7 +148,6 @@ Resources:
       BranchName: main
       AppId: !GetAtt TruthSeekerAmplifyApp.AppId
       EnableAutoBuild: true
-
 
 Metadata:
   AWS::Composer::Groups:
@@ -160,4 +159,4 @@ Metadata:
 
 Outputs:
   ApiGatewayBaseUrl:
-    Value: !Sub "https://${TruthSeekerRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev/"
+    Value: !Sub https://${TruthSeekerRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/dev/

@@ -47,7 +47,7 @@ def lambda_handler(event, context):
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
         },
-        'body': json.dumps(f"""{query} DEBUG MODE ENABLED""")
+        'body': json.dumps(f"""{query} {language} DEBUG MODE ENABLED""")
         }
     print("Build graph")
     graph = build_graph()
