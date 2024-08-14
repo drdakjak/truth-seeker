@@ -50,7 +50,7 @@ Resources:
         TruthSeekerRestApiGETgenerateresponsequery:
           Type: Api
           Properties:
-            Path: /generate_response/{query}
+            Path: /generate_response/{language}/{query}
             Method: GET
             RestApiId: !Ref TruthSeekerRestApi
   TruthSeekerRestApi:
@@ -64,7 +64,7 @@ Resources:
         openapi: '3.0'
         info: {}
         paths:
-          /generate_response/{query}:
+          /generate_response/{language}/{query}:
             get:
               x-amazon-apigateway-integration:
                 httpMethod: POST
