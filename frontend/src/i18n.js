@@ -6,9 +6,9 @@ const resources = {
   en: {
     translation: {
       "appTitle": "Q&A Web App",
-      "responseTitle": "Response",
-      "searchButton": "Search",
-      "placeholder": "Enter your question",
+      "responseTitle": "The truth is perhaps hidden somewhere here: ", //"Response",
+      "searchButton": "Feed", //"Search",
+      "placeholder": "Feed the Rabbit with a Question", //"Enter your question",
       "suggestions": [
         "Is climate change real?",
         "What is the capital of France?",
@@ -19,9 +19,9 @@ const resources = {
   cs: {
     translation: {
       "appTitle": "Q&A Webová aplikace",
-      "responseTitle": "Odpověď",
-      "searchButton": "Hledat",
-      "placeholder": "Zadejte svou otázku",
+      "responseTitle": "Pravda se skrývá možná někde tady: ", // "Odpověď", 
+      "searchButton": "Nakrm", //"Hledej",
+      "placeholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
       "suggestions": [
         "Je změna klimatu skutečná?",
         "Jaké je hlavní město Francie?",
@@ -32,9 +32,9 @@ const resources = {
   de: {
     translation: {
       "appTitle": "Q&A Webanwendung",
-      "responseTitle": "Antwort",
-      "searchButton": "Suche",
-      "placeholder": "Geben Sie Ihre Frage ein",
+      "responseTitle": "Die Wahrheit verbirgt sich vielleicht irgendwo hier:", //"Antwort",
+      "searchButton": "Füttere", // "Suche",
+      "placeholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
       "suggestions": [
         "Ist der Klimawandel real?",
         "Was ist die Hauptstadt von Frankreich?",

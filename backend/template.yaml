@@ -81,9 +81,9 @@ Resources:
       EndpointConfiguration: REGIONAL
       TracingEnabled: true
       Cors:
-        AllowOrigin: "'*'"
-        AllowHeaders: "Content-Type"
-        AllowMethods: "POST, GET"
+        AllowOrigin: '''*'''
+        AllowHeaders: '''Content-Type'''
+        AllowMethods: '''OPTIONS, POST, GET'''
   HealthCheck:
     Type: AWS::Serverless::Function
     Properties:

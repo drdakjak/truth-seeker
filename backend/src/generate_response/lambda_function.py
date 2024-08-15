@@ -4,6 +4,7 @@ from urllib.parse import unquote
 from agents.graph import build_graph
 from config import DEBUG_MODE
 
+
 def lambda_handler(event, context):
     print("Event: ", event)
     print("Context: ", context)
@@ -21,33 +22,52 @@ def lambda_handler(event, context):
     # key = os.environ['KEY']
     print(DEBUG_MODE)
 
-
-    
-
-
     if DEBUG_MODE:
         from load_secrets import load_secrets
+
         print("Loading secrets")
         load_secrets()
         print("Secrets loaded")
 
         from clients import get_model, get_tavily
+
         print("Getting model")
         model = get_model()
         print("Model gotten")
         print("Getting tavily")
         tavily = get_tavily()
         print("Tavily gotten")
-        
+        body = f"""
+Heading
+=======
+
+Sub-heading
+-----------
+
+# Alternative heading
+
+## Alternative sub-heading
+
+Paragraphs are separated 
+by a blank line.
+
+Two spaces at the end of a line  
+produce a line break.
+
+-------------
+DEBUG MODE ENABLED: query: {query} 
+
+Language: {language}
+"""
         return {
-        'statusCode': 200,
-        'headers': {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "*",
-        },
-        'body': json.dumps(f"""{query} {language} DEBUG MODE ENABLED""")
+            "statusCode": 200,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+            },
+            "body": json.dumps(body),
         }
     print("Build graph")
     graph = build_graph()
@@ -55,23 +75,23 @@ def lambda_handler(event, context):
 
     # query = "Dezinformátorské žně kvůli ukrajinskému obilí. EU přitom nezavádí omezení dovozu kvůli jedům"
     params = {
-        'task': query,
-        'target_language': language,
+        "task": query,
+        "target_language": language,
     }
     config = {"configurable": {"thread_id": 1}}
     print("Invoke graph")
     final_state = graph.invoke(params, config=config, debug=DEBUG_MODE)
     print("Finished")
-    content = final_state['draft']
+    content = final_state["draft"]
     print(json.dumps(content))
     # Return the response
     return {
-        'statusCode': 200,
-        'headers': {
+        "statusCode": 200,
+        "headers": {
             "Content-Type": "application/json",
             "Access-Control-Allow-Headers": "*",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
         },
-        'body': json.dumps(content)
+        "body": json.dumps(content),
     }
