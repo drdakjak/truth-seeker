@@ -1,10 +1,10 @@
-from typing import TypedDict, List
+from typing import TypedDict, List, Set, Tuple
 
 class AgentState(TypedDict):
     task: str
     plan: str
     draft: str
-    translation: str
     target_language: str
+    references: Set[Tuple[str, str]]
     queries: List[str]
-    content: List[str]
+    content: Set[str]
