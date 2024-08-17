@@ -6,11 +6,9 @@ Give an outline along with any relevant notes \
 or instructions for the sections."""
 
 RESEARCH_PLAN_PROMPT = """You are a researcher charged with providing information that can \
-be used when writing the following expository article. Firstly, generate a list of search queries that will gather \
+be used when writing the following expository article. Generate a list of search queries that will gather \
 any relevant information. Only generate {max_queries} queries max. Each query can be in a different language \
-to access wider variaty of content. Take into account that the user is looking for unbiased information.\
-Secodnly, you have access to the annual report of the Czech intelligence agency. Generate a list of queries that will gather \
-any relevant information. Only generate {max_queries} queries max. Each query must be in english."""
+to access wider variaty of content. Take into account that the user is looking for unbiased information"""
 
 WRITER_PROMPT = """You are an assistant tasked with writing an excellent article.\
 Generate the best objective article possible for the user's request and the initial outline. \
