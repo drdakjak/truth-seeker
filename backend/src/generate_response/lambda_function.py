@@ -84,11 +84,11 @@ Language: {language}
     print("Finished")
     content = final_state["draft"]
     print(json.dumps(content))
+    references = sorted(final_state["references"], key=lambda x: x[0])
+    
     # Return the response
-    references = final_state["references"]
-
     body = {
-        'reference': references,
+        'references': references,
         'content': content
     }
     return {

@@ -19,8 +19,8 @@ Structure the article in a way that is easy to read and understand. \
 If the user provides critique, respond with a revised version of your previous attempts. \
 Utilize only the information below, don't add any new information, make up or gues anything, or change the topic. \
 Make sure that the text is well formatted markdown text. \
-ADD references in APA style as number(s) in [] to each part of the text based on reference number of the content.\
-DO NOT add the list of references. \
+ADD citation in APA style as number(s) in [] to each part of the text based on reference number of the content.\
+DO NOT add the section with references to the text. \
 \
 The text MUST BE written in language: {language}. \
 ------ \
