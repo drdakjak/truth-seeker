@@ -5,33 +5,36 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   en: {
     translation: {
-      "appTitle": "Q&A Web App",
+      "appTitle": "Truth Seeker",
+      "appSubtitle": "Your Way out of the Rabbit Hole.",
       "responseTitle": "The truth is perhaps hidden somewhere here: ", //"Response",
       "searchButton": "Feed", //"Search",
       "placeholder": "Feed the Rabbit with a Question", //"Enter your question",
       "suggestions": [
+        "Was the 9/11 attack orchestrated by the U.S. government or did officials have insider knowledge?",
         "Is climate change real?",
-        "What is the capital of France?",
-        "How to learn programming?"
+        "Chemtrails",
       ]
     }
   },
   cs: {
     translation: {
-      "appTitle": "Q&A Webová aplikace",
+      "appTitle": "Truth Seeker",
+      "appSubtitle": "Tvoje cesta z králičí nory.",
       "responseTitle": "Pravda se skrývá možná někde tady: ", // "Odpověď", 
       "searchButton": "Nakrm", //"Hledej",
       "placeholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
       "suggestions": [
         "Je změna klimatu skutečná?",
-        "Jaké je hlavní město Francie?",
-        "Jak se naučit programovat?"
+        "Ovládají svět ve skutečnosti mimozemšťané?",
+        "Byl virus COVID-19 uměle vytvořen nebo je spojen s technologií 5G?"
       ]
     }
   },
   de: {
     translation: {
-      "appTitle": "Q&A Webanwendung",
+      "appTitle": "Truth Seeker",
+      "appSubtitle": "Ask a question and get an answer.",
       "responseTitle": "Die Wahrheit verbirgt sich vielleicht irgendwo hier:", //"Antwort",
       "searchButton": "Füttere", // "Suche",
       "placeholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",

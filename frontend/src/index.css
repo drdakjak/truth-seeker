@@ -1,140 +1,72 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap');
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f5e6cc; /* Light brown background */
-  color: #4b3f2f; /* Dark brown text */
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-.App {
-  background-color: #ffffff; /* White background */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  max-width: 900px;
-  width: 100%;
-}
-
-h1 {
-  font-size: 2.5rem;
-  color: #6b4f3f; /* Darker brown */
-  margin-bottom: 20px;
-}
-
-input, button {
-  font-size: 1rem;
-  padding: 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-}
-
-input:focus, button:focus {
-  outline: none;
-  border-color: #d1a17a; /* Soft brown */
-}
-
-button {
-  background-color: #d1a17a; /* Soft brown */
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #b5886a; /* Darker soft brown */
-}
-
-.suggestion {
-  cursor: pointer;
-  background-color: #f5e6cc; /* Light brown */
-  color: #6b4f3f; /* Darker brown */
-  padding: 8px 12px;
-  border-radius: 16px;
-  margin: 4px;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.suggestion:hover {
-  background-color: #e0d1b3; /* Slightly darker light brown */
-  transform: scale(1.05);
-}
-
-.spinner-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; /* Ensure it is on top of other elements */
-}
-
-.spinner {
-  width: 36px;
-  height: 36px;
-  background-image: url('/carrot.png'); /* Path to your carrot image */
-  background-size: cover;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+@layer base {
+  body {
+    @apply font-sans text-gray-900 antialiased;
+    font-family: 'Roboto', sans-serif;
   }
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .suggestion {
-    padding: 6px 10px;
-    margin: 2px;
-    font-size: 0.875rem; /* Smaller font size for mobile */
+@layer components {
+  .app-title {
+    font-family: 'Playfair Display', serif;
+    @apply text-4xl font-bold text-gray-900 leading-tight;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
   }
 
-  .spinner {
-    width: 24px;
-    height: 24px;
-    border-width: 3px;
-  }
-}
-
-@media (max-width: 480px) {
-  .suggestion {
-    padding: 4px 8px;
-    margin: 2px;
-    font-size: 0.75rem; /* Even smaller font size for smaller screens */
+  .app-subtitle {
+    font-family: 'Roboto', sans-serif;
+    @apply text-xl text-indigo-600 font-light mt-2;
+    overflow: hidden; /* Ensures that text is hidden until it is "typed" out */
+    white-space: nowrap; /* Keeps text on a single line */
+    border-right: 3px solid; /* Creates a cursor effect */
+    width: 100%; /* Initially hides the text */
+    animation: typing 3s steps(30, end) forwards, blink-caret 3s steps(30, end) forwards;
   }
 
-  .spinner {
-    width: 20px;
-    height: 20px;
-    border-width: 2px;
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #6366F1; } /* Matches the text color */
+  }
+
+  .prose {
+    @apply text-gray-800;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    @apply text-gray-900 font-bold mb-4;
+  }
+  
+  .prose h1 {
+    @apply text-3xl;
+  }
+  
+  .prose h2 {
+    @apply text-2xl;
+  }
+  
+  .prose h3 {
+    @apply text-xl;
+  }
+  
+  .prose p {
+    @apply mb-4;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-4 pl-5;
+  }
+  
+  .prose li {
+    @apply mb-2;
   }
 }
-
-button {
-  background-color: #d1a17a; /* Soft brown */
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #b5886a; /* Darker soft brown */
-}
-

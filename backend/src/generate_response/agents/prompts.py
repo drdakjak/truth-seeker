@@ -18,8 +18,10 @@ Focus on easy to understand language, clear explanations and suitable for a regu
 Structure the article in a way that is easy to read and understand. \
 If the user provides critique, respond with a revised version of your previous attempts. \
 Utilize only the information below, don't add any new information, make up or gues anything, or change the topic. \
-Make sure that the text is written in the language: {language}. \
+\
 Make sure that the text is well formated markdown text. \
+\
+The text MUST BE written in language: {language}. \
 ------ \
 \
 {content}"""
