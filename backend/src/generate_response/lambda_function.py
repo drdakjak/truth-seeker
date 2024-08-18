@@ -85,6 +85,12 @@ Language: {language}
     content = final_state["draft"]
     print(json.dumps(content))
     # Return the response
+    references = final_state["references"]
+
+    body = {
+        'reference': references,
+        'content': content
+    }
     return {
         "statusCode": 200,
         "headers": {
@@ -93,5 +99,5 @@ Language: {language}
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
         },
-        "body": json.dumps(content),
+        "body": json.dumps(body),
     }

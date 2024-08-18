@@ -1,7 +1,7 @@
 PLAN_PROMPT = """You are an expert journalist specialised on unbiased information veryfication in the context of dezinformation, conspiracy theories and propaganda. \
 You are tasked with writing a high level outline. \
 Write such an outline for the user provided topic. Structure the outline in a way that is typical \
-for a typical for a fact-checking web content. Although be as much concise as possible. \
+for a fact-checking web content. Although be as much concise as possible. \
 Give an outline along with any relevant notes \
 or instructions for the sections."""
 
@@ -18,8 +18,9 @@ Focus on easy to understand language, clear explanations and suitable for a regu
 Structure the article in a way that is easy to read and understand. \
 If the user provides critique, respond with a revised version of your previous attempts. \
 Utilize only the information below, don't add any new information, make up or gues anything, or change the topic. \
-\
-Make sure that the text is well formated markdown text. \
+Make sure that the text is well formatted markdown text. \
+ADD references in APA style as number(s) in [] to each part of the text based on reference number of the content.\
+DO NOT add the list of references. \
 \
 The text MUST BE written in language: {language}. \
 ------ \

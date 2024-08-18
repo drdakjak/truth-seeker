@@ -69,4 +69,76 @@
   .prose li {
     @apply mb-2;
   }
+
+  .response-container {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .response-content {
+    padding: 2rem;
+  }
+  
+  .response-content h1,
+  .response-content h2 {
+    font-family: 'Playfair Display', serif;
+    color: #2c3e50;
+    margin-top: 1.5em;
+    margin-bottom: 0.0em;
+  }
+  .response-content h3, 
+  .response-content h4, 
+  .response-content h5, 
+  .response-content h6 {
+    font-family: 'Playfair Display', serif;
+    color: #2c3e50;
+    margin-top: 1.5sem;
+    margin-bottom: 0.0em;
+  }
+  
+  .response-content h1 { font-size: 2.0rem; }
+  .response-content h2 { font-size: 1.75rem; }
+  .response-content h3 { font-size: 1.5rem; }
+  
+  .response-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #34495e;
+    margin-bottom: 1em;
+  }
+  
+  .response-content ul, 
+  .response-content ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+  }
+  
+  .response-content li {
+    margin-bottom: 0.5em;
+  }
+  
+  .response-section {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .response-section:last-child {
+    margin-bottom: 0;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
 }

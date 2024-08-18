@@ -39,7 +39,9 @@ const Search = () => {
         }
       }).response;
       const data = await response.body.json();
-      setResponse(data);
+      const content = data["content"];
+      const referecens = data["references"];
+      setResponse(content);
     } catch (error) {
       console.error('Error calling Lambda function:', error);
     } finally {
@@ -111,10 +113,22 @@ const Search = () => {
           </div>
           
           {response && (
-            <div className="border-t border-gray-200 p-6">
-              <ReactMarkdown className="prose max-w-none" aria-live="polite">{response}</ReactMarkdown>
-            </div>
-          )}
+            <div className="response-container fade-in">
+              <div className="response-content">
+                <ReactMarkdown 
+                  className="prose max-w-none"
+                  components={{
+                    h1: ({node, ...props}) => <h1 className="response-section" {...props} />,
+                    h2: ({node, ...props}) => <h2 className="response-section" {...props} />,
+                    h3: ({node, ...props}) => <h3 className="response-section" {...props} />,
+                    p: ({node, ...props}) => <p className="response-section" {...props} />,
+                  }}
+                >
+        {response}
+      </ReactMarkdown>
+    </div>
+  </div>
+)}
         </div>
       </div>
       

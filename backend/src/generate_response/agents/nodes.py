@@ -97,13 +97,16 @@ def get_queries(state: AgentState, model):
 @inject_tavily(TAVILY)
 def get_content(state, queries, tavily):
     references = state["references"] or set()
-    content = state["content"] or set()
+    contents = state["content"] or set()
+    ref_num = 0
     for q in queries:
         response = tavily.search(query=q, max_results=TAVILY_MAX_RESULTS)
         for r in response["results"]:
-            content.add(r["content"])
-            references.add((r["title"], r["url"]))
-    return content, references
+            content = f"REFERENCE: {ref_num}\n\n" + r["content"]
+            contents.add(content)
+            references.add((ref_num, r["title"], r["url"]))
+            ref_num += 1
+    return contents, references
 
 
 def research_plan_node(state: AgentState):
