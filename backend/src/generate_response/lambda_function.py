@@ -4,6 +4,7 @@ from urllib.parse import unquote
 from agents.graph import build_graph
 from config import DEBUG_MODE
 
+from helpers import get_only_used_references
 
 def lambda_handler(event, context):
     print("Event: ", event)
@@ -82,9 +83,15 @@ Language: {language}
     print("Invoke graph")
     final_state = graph.invoke(params, config=config, debug=DEBUG_MODE)
     print("Finished")
+
     content = final_state["draft"]
+    references = final_state["references"]
+
     print(json.dumps(content))
-    references = sorted(final_state["references"], key=lambda x: x[0])
+    
+    
+    references = get_only_used_references(content, references)
+    
     
     # Return the response
     body = {

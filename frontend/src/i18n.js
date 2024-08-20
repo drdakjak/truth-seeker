@@ -6,11 +6,12 @@ const resources = {
   en: {
     translation: {
       "appTitle": "Truth Seeker",
-      "appSubtitle": "Your Way out of the Rabbit Hole.",
+      "appSubtitle": "Your Way Out of the Rabbit Hole.",
       "responseTitle": "The truth is perhaps hidden somewhere here: ", //"Response",
       "searchButton": "Feed", //"Search",
       "placeholder": "Feed the Rabbit with a Question", //"Enter your question",
       "references": "References",
+      "textSequence": ['Loading', 'Please wait', 'Almost there'],
       "suggestions": [
         "Was the 9/11 attack orchestrated by the U.S. government or did officials have insider knowledge?",
         "Is climate change real?",
@@ -25,6 +26,7 @@ const resources = {
       "responseTitle": "Pravda se skrývá možná někde tady: ", // "Odpověď", 
       "searchButton": "Nakrm", //"Hledej",
       "placeholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
+      "textSequence": ['Čteme internety', 'Chroupáme výsledky', 'Skoro hotovo'],
       "references": "Zroje",
       "suggestions": [
         "Je změna klimatu skutečná?",
@@ -41,6 +43,7 @@ const resources = {
       "searchButton": "Füttere", // "Suche",
       "placeholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
       "references": "Referenzen",
+      "textSequence": ['Loading', 'Please wait', 'Almost there'],
       "suggestions": [
         "Ist der Klimawandel real?",
         "Was ist die Hauptstadt von Frankreich?",
