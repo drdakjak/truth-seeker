@@ -3,6 +3,7 @@ from langgraph.graph import StateGraph
 from agents import nodes
 from agents import state
 
+
 def build_graph():
     checkpointer = MemorySaver()
 
@@ -18,3 +19,13 @@ def build_graph():
 
     graph = builder.compile(checkpointer=checkpointer)
     return graph
+
+
+def invoke_graph(graph: StateGraph, query: str, language: str, debug: bool = False):
+    params = {
+        "task": query,
+        "target_language": language,
+    }
+    config = {"configurable": {"thread_id": 1}}
+    final_state = graph.invoke(params, config=config, debug=debug)
+    return final_state

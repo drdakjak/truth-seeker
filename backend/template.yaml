@@ -11,6 +11,9 @@ Parameters:
   Repository:
     Type: String
     Description: The GitHub repository to deploy the frontend to
+  SecretName:
+    Type: String
+    Description: The AWS Secrets Manager's secret name with Tavily and OpenAI API keys
 
 Resources:
   GenerateResponse:
@@ -30,18 +33,27 @@ Resources:
         MaximumEventAgeInSeconds: 21600
         MaximumRetryAttempts: 2
       PackageType: Zip
+      Environment:
+        Variables:
+          SECRET_NAME: !Ref SecretName
+          REGION_NAME: !Ref AWS::Region
       Policies:
-        - Statement:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+              Resource: !Sub arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${SecretName}*
             - Effect: Allow
               Action:
                 - logs:CreateLogGroup
-              Resource: arn:aws:logs:us-west-2:360400205813:*
+              Resource: !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*
             - Effect: Allow
               Action:
                 - logs:CreateLogStream
                 - logs:PutLogEvents
               Resource:
-                - arn:aws:logs:us-west-2:360400205813:log-group:/aws/lambda/GenerateResponse:*
+                - !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/GenerateResponse:*
       SnapStart:
         ApplyOn: None
       RuntimeManagementConfig:
@@ -148,6 +160,9 @@ Resources:
       BranchName: main
       AppId: !GetAtt TruthSeekerAmplifyApp.AppId
       EnableAutoBuild: true
+  prodTest:
+    Type: AWS::SecretsManager::Secret
+    Properties: {}
 
 Metadata:
   AWS::Composer::Groups:

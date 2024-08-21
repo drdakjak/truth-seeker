@@ -1,7 +1,12 @@
 import json
+import logging
+
+logger = logging.getLogger()
+logger.setLevel("INFO")
+
 def handler(event, context):
     # Log the event argument for debugging and for use in local development.
-    print(json.dumps(event))
+    logger.info(json.dumps(event))
 
     return {'statusCode': 200, 
             'headers': {
