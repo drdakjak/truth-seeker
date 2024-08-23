@@ -12,6 +12,7 @@ const resources = {
       "placeholder": "Feed the Rabbit with a Question", //"Enter your question",
       "references": "References",
       "textSequence": ['Loading', 'Please wait', 'Almost there'],
+      "language": "en",
       "suggestions": [
         "Was the 9/11 attack orchestrated by the U.S. government or did officials have insider knowledge?",
         "Is climate change real?",
@@ -28,6 +29,7 @@ const resources = {
       "placeholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
       "textSequence": ['Čteme internety', 'Chroupáme výsledky', 'Skoro hotovo'],
       "references": "Zroje",
+      "language": "cs",
       "suggestions": [
         "Je změna klimatu skutečná?",
         "Ovládají svět ve skutečnosti mimozemšťané?",
@@ -43,6 +45,7 @@ const resources = {
       "searchButton": "Füttere", // "Suche",
       "placeholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
       "references": "Referenzen",
+      "language": "de",
       "textSequence": ['Loading', 'Please wait', 'Almost there'],
       "suggestions": [
         "Ist der Klimawandel real?",

@@ -11,7 +11,7 @@ const Search = () => {
   const [input, setInput] = useState('');
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState(t('language'));
   const [references, setReferences] = useState([]);
   const [timeCounter, setTimeCounter] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);

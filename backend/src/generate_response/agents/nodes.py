@@ -1,9 +1,10 @@
 from typing import List
+import logging
 
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.pydantic_v1 import BaseModel
 
-from config import TAVILY_MAX_RESULTS
+from config import TAVILY_MAX_RESULTS, DEBUG_MODE
 from clients import get_model, get_tavily
 from agents.state import AgentState
 from agents import prompts
@@ -11,6 +12,8 @@ from agents import prompts
 MODEL = get_model()
 TAVILY = get_tavily()
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO if DEBUG_MODE else logging.ERROR)
 
 def inject_model(model):
     def decorator(func):
@@ -34,7 +37,8 @@ def inject_tavily(tavily):
 
 @inject_model(model=MODEL)
 def get_plan(state: AgentState, model):
-
+    
+    logger.info("Getting plan")
     messages = [
         SystemMessage(content=prompts.PLAN_PROMPT),
         HumanMessage(content=state["task"]),
@@ -42,6 +46,7 @@ def get_plan(state: AgentState, model):
     response = model.invoke(messages)
     plan = response.content
 
+    logger.info(f"Plan generated: {plan}")
     return plan
 
 
@@ -60,6 +65,8 @@ def format_content(contents: list):
 @inject_model(model=MODEL)
 def get_draft(state: AgentState, model):
 
+    logger.info("Getting draft")
+
     language = state["target_language"]
     content = format_content(state["content"])
     user_message = f"{state['task']}\n\nHere is my outline:\n\n{state['plan']}"
@@ -69,6 +76,8 @@ def get_draft(state: AgentState, model):
 
     response = model.invoke(messages)
     draft = response.content
+
+    logger.info(f"Draft generated: {draft}")
     return draft
 
 
@@ -86,16 +95,22 @@ class Queries(BaseModel):
 @inject_model(model=MODEL)
 def get_queries(state: AgentState, model):
 
+    logger.info("Getting queries")
+
     prompt = prompts.RESEARCH_PLAN_PROMPT.format(max_queries=TAVILY_MAX_RESULTS)
     messages = [SystemMessage(content=prompt), HumanMessage(content=state["task"])]
     queries = model.with_structured_output(Queries).invoke(messages)
     queries = queries.queries
 
+    logger.info(f"Queries generated: {queries}")
     return queries
 
 
 @inject_tavily(TAVILY)
 def get_content(state, queries, tavily):
+    
+    logger.info("Getting content and references")
+
     references = state["references"] or set()
     contents = state["content"] or set()
     ref_num = 0
@@ -106,6 +121,10 @@ def get_content(state, queries, tavily):
             contents.add(content)
             references.add((ref_num, r["title"], r["url"]))
             ref_num += 1
+
+    logger.info(f"Content generated: {contents}")
+    logger.info(f"References generated : {references}")
+
     return contents, references
 
 
