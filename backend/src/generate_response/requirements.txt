@@ -1,7 +1,7 @@
-python-dotenv
-langchain-openai
-tavily-python
-langgraph
-langchain-core
-botocore
-boto3
+python-dotenv==1.0.1
+langchain-openai==0.1.20
+tavily-python==0.3.5
+langgraph==0.2.0
+langchain-core==0.2.33
+boto3==1.34.155
+botocore==1.34.155

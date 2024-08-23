@@ -37,6 +37,8 @@ Resources:
         Variables:
           SECRET_NAME: !Ref SecretName
           REGION_NAME: !Ref AWS::Region
+          OPENAI_API_KEY: ''
+          TAVILY_API_KEY: ''
       Policies:
         - Version: '2012-10-17'
           Statement:

@@ -40,10 +40,27 @@ You can test the Lambda function locally using the AWS SAM CLI.
     sam local start-api
     ```
 
-3. Invoke the function locally:
+3. Build the application:
 
     ```bash
-    sam local invoke "GenerateResponse" -e events/event.json
+    sam build --use-container
+    ```
+
+3. Create a file `backend/.env.json` and add your OpenAI and Tavily API keys:
+
+    *backend/.env.json*
+    ```
+    {
+        "GenerateResponse": {
+            "OPENAI_API_KEY": your OpenAI API key,
+            "TAVILY_API_KEY": your TAVILY API key
+        }
+    }
+    ```
+4. Invoke the function locally:
+
+    ```bash
+    sam local invoke "GenerateResponse" --env-vars .env.json -e src/generate_response/events/event.json
     ```
 
 ### Frontend
@@ -72,12 +89,12 @@ The frontend is a React application located in the `frontend` directory. It allo
     npx tailwindcss -i ./src/index.css -o ./src/output.css --watch
     ```
 
-5. (Optional) Create file `frontend/.env` and set environmental variables to communicate with deployed API Gateway [see](#deployment)
+5. (Optional) Create file `frontend/.env` and set environmental variables to communicate with deployed API Gateway [see](#deployment):
 
     *frontend/.env*
     ```
     VITE_API_ENDPOINT= your ApiGatewayBaseUrl
-    VITE_REGION= your selected region
+    VITE_REGION= your region
     ```
 ## Configuration
 
