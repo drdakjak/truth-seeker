@@ -1,4 +1,4 @@
-import logo from '../../public/truth-seeker-high-resolution-logo-black-transparent-2.svg';
+import logo from '../../public/logo.svg';
 
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -97,6 +97,7 @@ const Search = () => {
             </div>
           </div>
         </div>
+        <p className="app-subsubtitle text-2xl text-indigo-600 font-light mt-2">{t('appSubsubtitle')}</p>
 
         <div className="bg-white shadow-xl rounded-lg overflow-hidden">
           <div className="p-6">

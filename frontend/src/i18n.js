@@ -7,6 +7,8 @@ const resources = {
     translation: {
       "appTitle": "Truth Seeker",
       "appSubtitle": "Your Way Out of the Rabbit Hole.",
+
+      "appSubsubtitle": "Truth Seeker scans the whole internet to offer you the facts without motives.",
       "responseTitle": "The truth is perhaps hidden somewhere here: ", //"Response",
       "searchButton": "Feed", //"Search",
       "placeholder": "Feed the Rabbit with a Question", //"Enter your question",
@@ -24,6 +26,7 @@ const resources = {
     translation: {
       "appTitle": "Truth Seeker",
       "appSubtitle": "Tvoje cesta z králičí nory.",
+      "appSubsubtitle": "Truth Seeker prohledává celý internet, aby ti nabídl fakta bez postranních úmyslů.",
       "responseTitle": "Pravda se skrývá možná někde tady: ", // "Odpověď", 
       "searchButton": "Nakrm", //"Hledej",
       "placeholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
@@ -41,6 +44,7 @@ const resources = {
     translation: {
       "appTitle": "Truth Seeker",
       "appSubtitle": "Your Way Out of the Rabbit Hole.",
+      "appSubsubtitle": "Truth Seeker durchsucht das gesamte Internet, um dir die Fakten ohne Hintergedanken anzubieten.",
       "responseTitle": "Die Wahrheit verbirgt sich vielleicht irgendwo hier:", //"Antwort",
       "searchButton": "Füttere", // "Suche",
       "placeholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
