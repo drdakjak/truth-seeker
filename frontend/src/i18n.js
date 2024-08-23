@@ -40,17 +40,16 @@ const resources = {
   de: {
     translation: {
       "appTitle": "Truth Seeker",
-      "appSubtitle": "Ask a question and get an answer.",
+      "appSubtitle": "Your Way Out of the Rabbit Hole.",
       "responseTitle": "Die Wahrheit verbirgt sich vielleicht irgendwo hier:", //"Antwort",
       "searchButton": "Füttere", // "Suche",
       "placeholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
       "references": "Referenzen",
       "language": "de",
-      "textSequence": ['Loading', 'Please wait', 'Almost there'],
+      "textSequence": ['Internet wird durchsucht', 'Bitte warte', 'Fast fertig'],
       "suggestions": [
         "Ist der Klimawandel real?",
-        "Was ist die Hauptstadt von Frankreich?",
-        "Wie lernt man Programmieren?"
+        "Ist Angela Merkel ein Reptil?"
       ]
     }
   }
