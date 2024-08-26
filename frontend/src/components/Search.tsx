@@ -1,10 +1,10 @@
 import logo from '../../public/logo.svg';
-
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { get } from 'aws-amplify/api';
 import FlagDropdown from './FlagDropdown';
 import { useTranslation } from 'react-i18next';
+import '../output.css';
 
 const Search = () => {
   const { t, i18n } = useTranslation();
@@ -22,7 +22,7 @@ const Search = () => {
     if (loading) {
       timer = setInterval(() => {
         setTimeCounter((prev) => prev - 1);
-        setCurrentTextIndex((prev) => (prev + 1 ) % textSequence.length);
+        setCurrentTextIndex((prev) => (prev + 1) % textSequence.length);
       }, 1000);
     } else {
       setTimeCounter(60);
@@ -30,6 +30,7 @@ const Search = () => {
     }
     return () => clearInterval(timer);
   }, [loading]);
+
   const languageOptions = [
     { value: 'cs', label: 'Czech', flagCode: 'CZ' },
     { value: 'de', label: 'German', flagCode: 'DE' },
@@ -47,7 +48,6 @@ const Search = () => {
     setLoading(true);
     try {
       const encodedUriInput = encodeURIComponent(input);
-      console.log(`generate_response/${language}/${encodedUriInput}`)
       const response = await get({
         apiName: "TruthSeekerRestApi",
         path: `generate_response/${language}/${encodedUriInput}`,
@@ -58,11 +58,11 @@ const Search = () => {
       const data = await response.body.json();
       const content = data["content"];
       const references = data["references"];
-      console.log(data)
       setResponse(content);
       setReferences(references);
     } catch (error) {
       console.error('Error calling Lambda function:', error);
+      setResponse("An error occurred while processing your request. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -86,104 +86,93 @@ const Search = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="flex items-center justify-center mb-12">
-          <img src={logo} alt="Truth Seeker Logo" className="h-32 mr-6" />
-          <div>
-            <div className="app-container">
-              <h1 className="app-title text-6xl font-extrabold text-gray-900 font-serif tracking-tight">{t('appTitle')}</h1>
-              <p className="app-subtitle text-2xl text-indigo-600 font-light mt-2">{t('appSubtitle')}</p>
-            </div>
-          </div>
-        </div>
-        <p className="app-subsubtitle text-2xl text-indigo-600 font-light mt-2">{t('appSubsubtitle')}</p>
-
-        <div className="bg-white shadow-xl rounded-lg overflow-hidden">
-          <div className="p-6">
-            <div className="flex items-center mb-6">
-              <FlagDropdown
-                value={language}
-                onChange={handleLanguageChange}
-                options={languageOptions}
-                className="w-32 mr-4"
-                aria-label={t('languageSelector')}
+    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl">
+        <div className="p-6 space-y-6">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <FlagDropdown
+              value={language}
+              onChange={handleLanguageChange}
+              options={languageOptions}
+              className="w-full sm:w-48"
+              aria-label={t('languageSelector')}
+            />
+            <div className="relative w-full">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={t('placeholder')}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+                aria-label={t('searchInput')}
               />
-              <div className="flex-grow relative">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder={t('placeholder')}
-                  className="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  aria-label={t('searchInput')}
-                />
-                <button
-                  onClick={() => handleSearch(input)}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150 ease-in-out"
-                  aria-label={t('searchButton')}
-                >
-                  {t('searchButton')}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2 mb-6">
-              {suggestions.map((suggestion, index) => (
-                <span
-                  key={index}
-                  onClick={() => handleSuggestionClick(suggestion)}
-                  className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-indigo-200 transition duration-150 ease-in-out word-wrap break-word word-break break-word white-space normal"
-                  role="button"
-                  tabIndex={0}
-                  onKeyPress={(e) => { if (e.key === 'Enter') handleSuggestionClick(suggestion); }}
-                >
-                  {suggestion}
-                </span>
-              ))}
             </div>
           </div>
+          <button
+            onClick={() => handleSearch(input)}
+            className="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center space-x-2"
+            aria-label={t('searchButton')}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+            </svg>
+            <span>{t('searchButton')}</span>
+          </button>
 
-          {response && (
-            <div className="response-container fade-in">
-              <div className="response-content">
-                <ReactMarkdown
-                  className="prose max-w-none"
-                  components={{
-                    h1: ({ node, ...props }) => <h1 className="response-section" {...props} />,
-                    h2: ({ node, ...props }) => <h2 className="response-section" {...props} />,
-                    h3: ({ node, ...props }) => <h3 className="response-section" {...props} />,
-                    p: ({ node, ...props }) => <p className="response-section" {...props} />,
-                  }}
-                >
-                  {response}
-                </ReactMarkdown>
-                
-                {references.length > 0 && (
-                  <div className="mt-8 border-t pt-4">
-                    <h2 className="text-xl font-bold mb-4">{t('references')}</h2>
-                    <div className="references-container">
-                      {references.map((ref, index) => (
-                        <ReferenceTab
-                          key={index}
-                          refNumber={ref[0]}
-                          title={ref[1]}
-                          url={ref[2]}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+          <div className="flex flex-wrap gap-2 overflow-x-auto pb-2">
+            {suggestions.map((suggestion, index) => (
+              <button
+                key={index}
+                onClick={() => handleSuggestionClick(suggestion)}
+                className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-all duration-300"
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-     
+      {response && (
+        <div className="mt-8 bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 animate-fadeIn">
+          <div className="p-6 space-y-6">
+            <ReactMarkdown
+              className="prose max-w-none"
+              components={{
+                h1: ({ node, ...props }) => <h1 className="text-2xl font-bold text-gray-900 mb-4" {...props} />,
+                h2: ({ node, ...props }) => <h2 className="text-xl font-semibold text-gray-800 mb-3" {...props} />,
+                h3: ({ node, ...props }) => <h3 className="text-lg font-medium text-gray-700 mb-2" {...props} />,
+                p: ({ node, ...props }) => <p className="text-gray-600 mb-4 leading-relaxed" {...props} />,
+                ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-4" {...props} />,
+                ol: ({ node, ...props }) => <ol className="list-decimal pl-5 mb-4" {...props} />,
+                li: ({ node, ...props }) => <li className="mb-2" {...props} />,
+              }}
+            >
+              {response}
+            </ReactMarkdown>
+
+            {references.length > 0 && (
+              <div className="mt-8 border-t pt-4">
+                <h2 className="text-xl font-bold mb-4">{t('references')}</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {references.map((ref, index) => (
+                    <ReferenceTab
+                      key={index}
+                      refNumber={ref[0]}
+                      title={ref[1]}
+                      url={ref[2]}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {loading && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center backdrop-filter backdrop-blur-sm transition-all duration-300">
+          <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4 animate-pulse">
             <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
             <div className="text-center">
               <p className="text-lg font-semibold text-gray-800">{textSequence[currentTextIndex]}</p>
@@ -192,7 +181,7 @@ const Search = () => {
           </div>
         </div>
       )}
-  </div>
+    </div>
   );
 };
 
