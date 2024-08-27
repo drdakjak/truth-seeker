@@ -74,6 +74,13 @@ Resources:
         - ${ResourceName}
         - ResourceName: TruthSeekerRestApi
       StageName: dev
+      CacheClusterEnabled: true
+      CacheClusterSize: '0.5'
+      MethodSettings:
+        - CachingEnabled: true
+          CacheTtlInSeconds: 28800
+          HttpMethod: '*'
+          ResourcePath: '/*'
       DefinitionBody:
         openapi: '3.0'
         info: {}

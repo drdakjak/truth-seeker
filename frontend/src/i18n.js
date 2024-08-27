@@ -9,9 +9,17 @@ const resources = {
       "appSubtitle": "Your Way Out of the Rabbit Hole.",
 
       "appSubsubtitle": "Truth Seeker scans the whole internet to offer you the facts without motives.",
+
+      "appSubsubtitlePart1": "Truth Seeker",
+      "appSubsubtitlePart2": " scans the ",
+      "appSubsubtitlePart3": "whole internet ",
+      "appSubsubtitlePart4": "to offer you the facts ",
+      "appSubsubtitlePart5": "without motives",
+      "appSubsubtitlePart6": ".",
+
       "responseTitle": "The truth is perhaps hidden somewhere here: ", //"Response",
       "searchButton": "Feed", //"Search",
-      "placeholder": "Feed the Rabbit with a Question", //"Enter your question",
+      "searchPlaceholder": "Feed the Rabbit with a Question", //"Enter your question",
       "references": "References",
       "textSequence": ['Loading', 'Please wait', 'Almost there'],
       "language": "en",
@@ -27,9 +35,17 @@ const resources = {
       "appTitle": "Truth Seeker",
       "appSubtitle": "Tvoje cesta z králičí nory.",
       "appSubsubtitle": "Truth Seeker prohledává celý internet, aby ti nabídl fakta bez postranních úmyslů.",
+
+      "appSubsubtitlePart1": "Truth Seeker",
+      "appSubsubtitlePart2": " prohledává ",
+      "appSubsubtitlePart3": "celý internet",
+      "appSubsubtitlePart4": ", aby ti nabídl fakta bez ",
+      "appSubsubtitlePart5": "postranních úmyslů",
+      "appSubsubtitlePart6": ".",
+
       "responseTitle": "Pravda se skrývá možná někde tady: ", // "Odpověď", 
       "searchButton": "Nakrm", //"Hledej",
-      "placeholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
+      "searchPlaceholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
       "textSequence": ['Čteme internety', 'Chroupáme výsledky', 'Skoro hotovo'],
       "references": "Zroje",
       "language": "cs",
@@ -44,10 +60,17 @@ const resources = {
     translation: {
       "appTitle": "Truth Seeker",
       "appSubtitle": "Your Way Out of the Rabbit Hole.",
-      "appSubsubtitle": "Truth Seeker durchsucht das gesamte Internet, um dir die Fakten ohne Hintergedanken anzubieten.",
+
+      "appSubsubtitlePart1": "Truth Seeker",
+      "appSubsubtitlePart2": " durchsucht das ",
+      "appSubsubtitlePart3": "gesamte Internet",
+      "appSubsubtitlePart4": ", um dir die Fakten ohne ",
+      "appSubsubtitlePart5": "Hintergedanken",
+      "appSubsubtitlePart6": " anzubieten.",
+      
       "responseTitle": "Die Wahrheit verbirgt sich vielleicht irgendwo hier:", //"Antwort",
       "searchButton": "Füttere", // "Suche",
-      "placeholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
+      "searchPlaceholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
       "references": "Referenzen",
       "language": "de",
       "textSequence": ['Internet wird durchsucht', 'Bitte warte', 'Fast fertig'],

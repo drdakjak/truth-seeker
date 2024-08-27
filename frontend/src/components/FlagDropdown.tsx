@@ -1,5 +1,5 @@
 import React from 'react';
-import Flag from 'react-world-flags';
+import ReactCountryFlag from "react-country-flag"
 
 interface FlagDropdownProps {
   value: string;
@@ -9,21 +9,24 @@ interface FlagDropdownProps {
 
 const FlagDropdown: React.FC<FlagDropdownProps> = ({ value, onChange, options }) => {
   return (
-    <div className="flag-dropdown flex items-center">
+    <div className="flex-wrap p-1 bg-white rounded-lg">
+      <ReactCountryFlag
+      className="w-full h-full mr-1"
+        countryCode={options.find((option) => option.value === value).flagCode} 
+        svg
+      />
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="p-4 border border-gray-300 rounded-l-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="p-1  focus:outline-none"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
+
           </option>
         ))}
       </select>
-      <div className="flag-icon ml-2">
-        <Flag code={options.find((option) => option.value === value)?.flagCode || ''} height="16" />
-      </div>
     </div>
   );
 };
