@@ -78,7 +78,7 @@ Resources:
       CacheClusterSize: '0.5'
       MethodSettings:
         - CachingEnabled: true
-          CacheTtlInSeconds: 28800
+          CacheTtlInSeconds: 3600
           HttpMethod: '*'
           ResourcePath: '/*'
       DefinitionBody:
