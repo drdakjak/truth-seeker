@@ -5,7 +5,7 @@ const ReferenceTab = ({ refNumber, title, url }) => (
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="reference-tab inline-block bg-gray-200 rounded-lg py-2 px-3 text-sm font-medium text-gray-800 hover:bg-gray-300 transition duration-150 ease-in-out m-1"
+      className="inline-block bg-indigo-100 rounded-lg py-2 px-3 text-sm font-normal text-indigo-950 hover:bg-indigo-200 transition duration-150 ease-in-out m-1 max-w-44"
     >
       <span className="font-bold">[{refNumber}]</span>
       <span className="block">{title}</span>
@@ -15,9 +15,9 @@ const ReferenceTab = ({ refNumber, title, url }) => (
 const References = ({ references, referenceTitle }) => {
     return (
         references.length > 0 && (
-            <div className="">
-              <h2 className="response-section">{referenceTitle}</h2>
-              <div className="references-container">
+            <div className="mt-10 ">
+              {/* <h2 className="">{referenceTitle}</h2> */}
+              <div className="flex text-center break-words justify-items-stretch">
                 {references.map((ref, index) => (
                   <ReferenceTab
                     key={index}

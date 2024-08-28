@@ -51,7 +51,7 @@ const Search = () => {
     handleSearch(suggestion);
   };
   return (
-    <div className="">
+    <div className="antialiased">
       <NavBar />
       <div className="max-w-5xl mx-auto pt-20">
         <div className="flex items-center justify-center mb-12">
@@ -63,12 +63,12 @@ const Search = () => {
             </div>
           </div>
         </div>
-        <p className="app-subsubtitle text-center text-l text-wrap leading-snug text-indigo-300 font-light mt-5">
-          <span className="text-white text-xl">{t('appSubsubtitlePart1')}</span>
+        <p className="app-subsubtitle text-center text-l text-wrap leading-loose text-indigo-300 font-light mt-5">
+          <span className="text-white text-xl leading-snag font-serif">{t('appSubsubtitlePart1')}</span>
           {t('appSubsubtitlePart2')}
           <span className="text-white text-xl">{t('appSubsubtitlePart3')}</span>
           {t('appSubsubtitlePart4')}
-          <span className="text-white underline text-xl">{t('appSubsubtitlePart5')}</span>
+          <span className="text-white underline underline-offset-2 text-xl">{t('appSubsubtitlePart5')}</span>
           {t('appSubsubtitlePart6')}
         </p>
         <div className='px-24 py-4'>
@@ -91,18 +91,20 @@ const Search = () => {
             </div>
           </div>
         </div>
-
         {response && (
           <div className="bg-slate-50 fade-in mt-3 shadow-xl rounded-lg overflow-hidden border-4">
             <div className="p-6 font-sans">
 
               <ReactMarkdown
-                className=""
+                className="bg-slate-50 text-indigo-950 text-2xl font-light leading-relaxed"
                 components={{
-                  h1: ({ node, ...props }) => <h1 className="text-indigo-900 text-4xl my-5 font-semibold" {...props} />,
-                  h2: ({ node, ...props }) => <h2 className="bg-indigo-950 text-white shadow-sm py-2 text-2xl rounded-lg" {...props} />,
-                  h3: ({ node, ...props }) => <h3 className="" {...props} />,
-                  p: ({ node, ...props }) => <p className="" {...props} />,
+                  h1: ({ node, ...props }) => <h1 className="tracking-tight text-center p-5 my-10 text-6xl leading-snag font-serif font-medium border-b-4 border-indigo-900" {...props} />,
+                  h2: ({ node, ...props }) => <h2 className="font-serif font-semibold mt-6 mb-3 py-2 text-3xl " {...props} />,
+                  h3: ({ node, ...props }) => <h3 className="m-4 font-medium underline underline-offset-2" {...props} />,
+                  p: ({ node, ...props }) => <p className="indent-5" {...props} />,
+                  ul: ({ node, ...props }) => <ul className="" {...props} />,
+                  li: ({ node, ...props }) => <li className="" {...props} />,
+
                 }}
               >
                 {response}
@@ -111,6 +113,8 @@ const Search = () => {
             </div>
           </div>
         )}
+        {/* </div> */}
+
       </div>
       {loading && <Spinner loading={loading} textSequence={textSequence} />}
     </div>
