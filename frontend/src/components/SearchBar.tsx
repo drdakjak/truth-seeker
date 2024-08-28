@@ -14,7 +14,7 @@ const SearchBar = ({ input, setInput, placeholder, searchButton, handleSearch })
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={placeholder}
-                className="caret-indigo-500 w-full pl-12 pr-12 py-3 text-2xl border-2 border-indigo-500 rounded-lg focus:ring-2 focus:ring-indigo-800 focus:border-indigo-800"
+                className="caret-indigo-500 w-full pl-12 pr-12 py-3 md:text-xl sm:text-l border-2 border-indigo-500 rounded-lg focus:ring-2 focus:ring-indigo-800 focus:border-indigo-800"
             />
 
             <button

@@ -98,7 +98,7 @@ const Search = () => {
               <ReactMarkdown
                 className="bg-slate-50 text-indigo-950 text-2xl font-light leading-relaxed"
                 components={{
-                  h1: ({ node, ...props }) => <h1 className="tracking-tight text-center p-5 my-10 text-6xl leading-snag font-serif font-medium border-b-4 border-indigo-900" {...props} />,
+                  h1: ({ node, ...props }) => <h1 className="tracking-tight text-center p-5 my-10 sm:text-3xl md:text-4xl  leading-snag font-serif font-medium border-b-4 border-indigo-900" {...props} />,
                   h2: ({ node, ...props }) => <h2 className="font-serif font-semibold mt-6 mb-3 py-2 text-3xl " {...props} />,
                   h3: ({ node, ...props }) => <h3 className="m-4 font-medium underline underline-offset-2" {...props} />,
                   p: ({ node, ...props }) => <p className="indent-5" {...props} />,
