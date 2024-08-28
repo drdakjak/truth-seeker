@@ -753,6 +753,10 @@ body {
   width: 100%;
 }
 
+.min-w-40 {
+  min-width: 10rem;
+}
+
 .max-w-44 {
   max-width: 11rem;
 }
@@ -763,6 +767,10 @@ body {
 
 .max-w-screen-xl {
   max-width: 1280px;
+}
+
+.max-w-60 {
+  max-width: 15rem;
 }
 
 .flex-grow {
@@ -822,12 +830,24 @@ body {
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-center {
   justify-content: center;
 }
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+.justify-items-start {
+  justify-items: start;
 }
 
 .justify-items-stretch {
@@ -862,12 +882,6 @@ body {
 
 .overflow-hidden {
   overflow: hidden;
-}
-
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .whitespace-nowrap {
@@ -1193,41 +1207,6 @@ body {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.first-letter\:float-left::first-letter {
-  float: left;
-}
-
-.first-letter\:mr-3::first-letter {
-  margin-right: 0.75rem;
-}
-
-.first-letter\:text-7xl::first-letter {
-  font-size: 4.5rem;
-  line-height: 1;
-}
-
-.first-letter\:font-bold::first-letter {
-  font-weight: 700;
-}
-
-.first-letter\:text-white::first-letter {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.first-letter\:text-black::first-letter {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.first-line\:uppercase::first-line {
-  text-transform: uppercase;
-}
-
-.first-line\:tracking-widest::first-line {
-  letter-spacing: 0.1em;
-}
-
 .hover\:bg-indigo-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(199 210 254 / var(--tw-bg-opacity));
@@ -1259,6 +1238,13 @@ body {
   --tw-ring-color: rgb(55 48 163 / var(--tw-ring-opacity));
 }
 
+@media (min-width: 640px) {
+  .sm\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
 @media (min-width: 768px) {
   .md\:order-2 {
     order: 2;
@@ -1268,6 +1254,16 @@ body {
     --tw-space-x-reverse: 0;
     margin-right: calc(0px * var(--tw-space-x-reverse));
     margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:px-24 {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 }
 

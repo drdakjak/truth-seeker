@@ -57,13 +57,13 @@ const Search = () => {
         <div className="flex items-center justify-center mb-12">
           {/* <img src={logo} alt="Truth Seeker Logo" className="h-32 mr-6" /> */}
           <div>
-            <div className="app-container">
-              <h1 className="app-title text-7xl font-extrabold text-gray-50 font-serif tracking-tight">{t('appTitle')}</h1>
-              <p className="app-subtitle text-center text-3xl text-indigo-300 font-light mt-2">{t('appSubtitle')}</p>
+            <div className="">
+              <h1 className="text-center text-7xl font-extrabold text-gray-50 font-serif tracking-tight">{t('appTitle')}</h1>
+              <p className="app-subtitle text-center md:text-3xl sm:text-2xl text-indigo-300 font-light mt-2">{t('appSubtitle')}</p>
             </div>
           </div>
         </div>
-        <p className="app-subsubtitle text-center text-l text-wrap leading-loose text-indigo-300 font-light mt-5">
+        <p className="text-center text-l text-wrap leading-loose text-indigo-300 font-light mt-5">
           <span className="text-white text-xl leading-snag font-serif">{t('appSubsubtitlePart1')}</span>
           {t('appSubsubtitlePart2')}
           <span className="text-white text-xl">{t('appSubsubtitlePart3')}</span>
@@ -71,7 +71,7 @@ const Search = () => {
           <span className="text-white underline underline-offset-2 text-xl">{t('appSubsubtitlePart5')}</span>
           {t('appSubsubtitlePart6')}
         </p>
-        <div className='px-24 py-4'>
+        <div className='md:px-24 py-4'>
           <div className="bg-white shadow-xl rounded-lg overflow-hidden">
             <div className="p-6">
               <div className="flex items-center mb-6">

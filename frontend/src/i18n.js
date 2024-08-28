@@ -21,7 +21,7 @@ const resources = {
       "searchButton": "Feed", //"Search",
       "searchPlaceholder": "Feed the Rabbit with a Question", //"Enter your question",
       "referenceTitle": "References",
-      "textSequence": ['Loading', 'Please wait', 'Almost there'],
+      "textSequence": ['Loading', 'Scanning the internet', 'Generating content', 'Critically thinking', 'Almost there', 'Please wait'],
       "language": "en",
       "suggestions": [
         "Was the 9/11 attack orchestrated by the U.S. government or did officials have insider knowledge?",
@@ -46,7 +46,7 @@ const resources = {
       "responseTitle": "Pravda se skrývá možná někde tady: ", // "Odpověď", 
       "searchButton": "Nakrm", //"Hledej",
       "searchPlaceholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
-      "textSequence": ['Čteme internety', 'Chroupáme výsledky', 'Skoro hotovo'],
+      "textSequence": ['Čteme internety', 'Chroupáme výsledky', 'Přemýšlíme', 'Vytváříme obsah', 'Skoro hotovo'],
       "referenceTitle": "Zroje",
       "language": "cs",
       "suggestions": [
