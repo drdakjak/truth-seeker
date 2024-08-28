@@ -12,15 +12,7 @@
 }
 
 @layer components {
-  .app-title {
-    /* font-family: 'Playfair Display', serif; */
-    /* @apply text-4xl font-bold text-gray-900 leading-tight; */
-    /* text-shadow: 2px 2px 4px rgba(0,0,0,0.1); */
-  }
-
   .app-subtitle {
-    /* font-family: 'Roboto', sans-serif; */
-    /* @apply text-xl text-indigo-600 font-light mt-2; */
     overflow: hidden;
     white-space: nowrap;
     border-right: 3px solid;
@@ -38,108 +30,6 @@
     50% { border-color: #6366F1; } /* Matches the text color */
   }
 
-  /* .prose {
-    @apply text-gray-800;
-  } */
-  
-  /* .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-    @apply text-gray-900 font-bold mb-4;
-  }
-   */
-  /* .prose h1 {
-    @apply text-3xl;
-  }
-  
-  .prose h2 {
-    @apply text-2xl;
-  }
-  
-  .prose h3 {
-    @apply text-xl;
-  }
-  
-  .prose p {
-    @apply mb-4;
-  }
-  
-  .prose ul, .prose ol {
-    @apply mb-4 pl-5;
-  }
-  
-  .prose li {
-    @apply mb-2;
-  } */
-
-  .response-container {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-top: 0rem;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-  
-  .response-content {
-    padding: 1.5rem;
-  }
-  
-  .response-content h1 {
-    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    color: #2c3e50;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-  .response-content h2 {
-    font-family: 'Playfair Display', serif;
-    color: #2c3e50;
-    /* margin-top: 0.0sem; */
-    margin-bottom: 0.0em;
-    margin-top: 0.5em;
-    /* margin-bottom: 1.0em; */
-  }
-  
-  .response-content h3, 
-  .response-content h4, 
-  .response-content h5, 
-  .response-content h6 {
-    font-family: 'Playfair Display', serif;
-    color: #2c3e50;
-    margin-top: 0.0sem;
-    margin-bottom: 0.0em;
-  }
-  
-  .response-content h1 { font-size: 2.5rem; }
-  .response-content h2 { font-size: 1.75rem; }
-  .response-content h3 { font-size: 1.5rem; }
-  
-  .response-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #34495e;
-    margin-bottom: 0em;
-  }
-  
-  .response-content ul, 
-  .response-content ol {
-    margin-left: 1.5em;
-    margin-bottom: 1em;
-  }
-  
-  .response-content li {
-    margin-bottom: 0.5em;
-  }
-  
-  .response-section {
-    background-color: white;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    padding: 1.0rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .response-section:last-child {
-    margin-bottom: 0;
-  }
   
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -147,26 +37,8 @@
   }
   
   .fade-in {
-    animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 1.0s ease-in;
   }
 
-  .reference-tab {
-    max-width: 300px; /* Adjust this value as needed */
-    white-space: normal;
-    word-wrap: break-word;
-    text-align: center;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .reference-tab:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .references-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-  }
+
 }
