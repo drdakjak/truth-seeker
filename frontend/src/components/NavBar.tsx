@@ -1,8 +1,9 @@
-
 import React, { useState } from 'react';
 
 import FlagDropdown from './FlagDropdown';
 import { useTranslation } from 'react-i18next';
+
+import logo from '../../public/logo-white.svg';
 
 const NavBar = () => {
   const { t, i18n } = useTranslation();
