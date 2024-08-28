@@ -23,7 +23,7 @@ const NavBar = () => {
         <nav className="border-gray-200 bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="../../public/logo-white.svg" className="h-10" alt="Truth Seeker Logo" />
+                    <img src={logo} className="h-10" alt="Truth Seeker Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Truth Seeker</span>
                 </div>
                 <div className="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">

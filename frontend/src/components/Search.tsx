@@ -57,16 +57,16 @@ const Search = () => {
           <div>
             <div className="">
               <h1 className="text-center text-7xl font-extrabold text-gray-50 font-serif tracking-tight">{t('appTitle')}</h1>
-              <p className="app-subtitle text-center md:text-3xl sm:text-2xl text-indigo-300 font-light mt-2">{t('appSubtitle')}</p>
+              <p className="app-subtitle text-center md:text-3xl text-2xl text-indigo-300 font-light mt-2">{t('appSubtitle')}</p>
             </div>
           </div>
         </div>
-        <p className="text-center text-l text-wrap leading-loose text-indigo-300 font-light mt-5">
-          <span className="text-white text-xl leading-snag font-serif">{t('appSubsubtitlePart1')}</span>
+        <p className="text-center md:text-lg text-sm text-wrap leading-loose text-indigo-300 font-light mt-5">
+          <span className="text-white md:text-xl text-base leading-snag font-serif">{t('appSubsubtitlePart1')}</span>
           {t('appSubsubtitlePart2')}
-          <span className="text-white text-xl">{t('appSubsubtitlePart3')}</span>
+          <span className="text-white md:text-xl text-base">{t('appSubsubtitlePart3')}</span>
           {t('appSubsubtitlePart4')}
-          <span className="text-white underline underline-offset-2 text-xl">{t('appSubsubtitlePart5')}</span>
+          <span className="text-white underline underline-offset-2 md:text-xl text-base">{t('appSubsubtitlePart5')}</span>
           {t('appSubsubtitlePart6')}
         </p>
         <div className='md:px-24 py-4'>
@@ -96,8 +96,8 @@ const Search = () => {
               <ReactMarkdown
                 className="bg-slate-50 text-indigo-950 text-2xl font-light leading-relaxed"
                 components={{
-                  h1: ({ node, ...props }) => <h1 className="tracking-tight text-center p-5 my-10 sm:text-3xl md:text-4xl  leading-snag font-serif font-medium border-b-4 border-indigo-900" {...props} />,
-                  h2: ({ node, ...props }) => <h2 className="font-serif font-semibold mt-6 mb-3 py-2 text-3xl " {...props} />,
+                  h1: ({ node, ...props }) => <h1 className="tracking-tight text-center p-5 my-10 text-4xl md:text-5xl leading-snag font-serif font-medium border-b-4 border-indigo-900" {...props} />,
+                  h2: ({ node, ...props }) => <h2 className="font-serif font-medium mt-6 mb-3 py-2 text-3xl " {...props} />,
                   h3: ({ node, ...props }) => <h3 className="m-4 font-medium underline underline-offset-2" {...props} />,
                   p: ({ node, ...props }) => <p className="indent-5" {...props} />,
                   ul: ({ node, ...props }) => <ul className="" {...props} />,
