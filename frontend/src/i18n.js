@@ -20,7 +20,7 @@ const resources = {
       "responseTitle": "The truth is perhaps hidden somewhere here: ", //"Response",
       "searchButton": "Feed", //"Search",
       "searchPlaceholder": "Feed the Rabbit with a Question", //"Enter your question",
-      "references": "References",
+      "referenceTitle": "References",
       "textSequence": ['Loading', 'Please wait', 'Almost there'],
       "language": "en",
       "suggestions": [
@@ -47,7 +47,7 @@ const resources = {
       "searchButton": "Nakrm", //"Hledej",
       "searchPlaceholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
       "textSequence": ['Čteme internety', 'Chroupáme výsledky', 'Skoro hotovo'],
-      "references": "Zroje",
+      "referenceTitle": "Zroje",
       "language": "cs",
       "suggestions": [
         "Je změna klimatu skutečná?",
@@ -71,7 +71,7 @@ const resources = {
       "responseTitle": "Die Wahrheit verbirgt sich vielleicht irgendwo hier:", //"Antwort",
       "searchButton": "Füttere", // "Suche",
       "searchPlaceholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
-      "references": "Referenzen",
+      "referenceTitle": "Referenzen",
       "language": "de",
       "textSequence": ['Internet wird durchsucht', 'Bitte warte', 'Fast fertig'],
       "suggestions": [

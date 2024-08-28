@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { get } from 'aws-amplify/api';
 import NavBar from './NavBar';
-import References from './Regerences';
+import References from './References';
 import { useTranslation } from 'react-i18next';
 import Suggestions from './Suggestion';
 import Spinner from './Spinner';
@@ -75,12 +75,11 @@ const Search = () => {
           <div className="bg-white shadow-xl rounded-lg overflow-hidden">
             <div className="p-6">
               <div className="flex items-center mb-6">
-                <SearchBar 
+                <SearchBar
                   input={input}
                   setInput={setInput}
-                  searchInput={t('searchInput')} 
-                  placeholder={t('searchPlaceholder')} 
-                  searchButton={t('searchButton')} 
+                  placeholder={t('searchPlaceholder')}
+                  searchButton={t('searchButton')}
                   handleSearch={handleSearch} />
               </div>
 
@@ -91,29 +90,29 @@ const Search = () => {
               </div>
             </div>
           </div>
-          {response && (
-            <div className="response-container fade-in">
-              <div className="response-content">
-                <ReactMarkdown
-                  className="prose max-w-none"
-                  components={{
-                    h1: ({ node, ...props }) => <h1 className="response-section" {...props} />,
-                    h2: ({ node, ...props }) => <h2 className="response-section" {...props} />,
-                    h3: ({ node, ...props }) => <h3 className="response-section" {...props} />,
-                    p: ({ node, ...props }) => <p className="response-section" {...props} />,
-                  }}
-                >
-                  {response}
-                </ReactMarkdown>
-                <References references={references} />
-              </div>
-            </div>
-          )}
         </div>
+
+        {response && (
+          <div className="bg-slate-50 fade-in mt-3 shadow-xl rounded-lg overflow-hidden border-4">
+            <div className="p-6 font-sans">
+
+              <ReactMarkdown
+                className=""
+                components={{
+                  h1: ({ node, ...props }) => <h1 className="text-indigo-900 text-4xl my-5 font-semibold" {...props} />,
+                  h2: ({ node, ...props }) => <h2 className="bg-indigo-950 text-white shadow-sm py-2 text-2xl rounded-lg" {...props} />,
+                  h3: ({ node, ...props }) => <h3 className="" {...props} />,
+                  p: ({ node, ...props }) => <p className="" {...props} />,
+                }}
+              >
+                {response}
+              </ReactMarkdown>
+              <References references={references} referenceTitle={t('referenceTitle')} />
+            </div>
+          </div>
+        )}
       </div>
-
-
-      {loading && <Spinner loading={loading} textSequence={textSequence}/>}
+      {loading && <Spinner loading={loading} textSequence={textSequence} />}
     </div>
   );
 };

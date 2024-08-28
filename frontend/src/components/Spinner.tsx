@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const Spinner = ({ textSequence, loading }) => {
-    const [timeCounter, setTimeCounter] = useState(0);
+    const [timeCounter, setTimeCounter] = useState(60);
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     useEffect(() => {
         let timer: NodeJS.Timeout;

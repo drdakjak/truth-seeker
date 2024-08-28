@@ -12,11 +12,11 @@ const ReferenceTab = ({ refNumber, title, url }) => (
     </a>
   );
 
-const References = ({ references }) => {
+const References = ({ references, referenceTitle }) => {
     return (
         references.length > 0 && (
-            <div className="mt-8 border-t pt-4">
-              <h2 className="text-xl font-bold mb-4">{t('references')}</h2>
+            <div className="">
+              <h2 className="response-section">{referenceTitle}</h2>
               <div className="references-container">
                 {references.map((ref, index) => (
                   <ReferenceTab

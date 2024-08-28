@@ -18,7 +18,7 @@ const FlagDropdown: React.FC<FlagDropdownProps> = ({ value, onChange, options })
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="p-1  focus:outline-none"
+        className="p-1 focus:outline-none"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
