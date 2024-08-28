@@ -19,7 +19,7 @@ const NavBar = () => {
     i18n.changeLanguage(newLanguage);
   };
     return (
-        <nav className="bg-white border-gray-200 dark:bg-gray-900">
+        <nav className="border-gray-200 bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="../../public/logo-white.svg" className="h-10" alt="Truth Seeker Logo" />
