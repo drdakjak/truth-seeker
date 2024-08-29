@@ -9,7 +9,7 @@ interface FlagDropdownProps {
 
 const FlagDropdown: React.FC<FlagDropdownProps> = ({ value, onChange, options }) => {
   return (
-    <div className="flex-wrap p-1 bg-white rounded-lg">
+    <div className="flex-wrap p-1 bg-slate-50 rounded-lg">
       <ReactCountryFlag
       className="w-full h-full mr-1"
         countryCode={options.find((option) => option.value === value).flagCode} 
@@ -18,7 +18,7 @@ const FlagDropdown: React.FC<FlagDropdownProps> = ({ value, onChange, options })
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="p-1 focus:outline-none appearance-none bg-transparent text-grey-50 font-medium"
+        className="md: p-1 text-base md:text-lg 2xl:text-xl focus:outline-none appearance-none bg-transparent text-grey-50 font-medium"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
