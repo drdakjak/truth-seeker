@@ -24,9 +24,9 @@ const NavBar = () => {
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src={logo} className="h-10" alt="Truth Seeker Logo" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Truth Seeker</span>
+                    <span className="self-center font-serif tracking-tight text-2xl md:text-2xl 2xl:text-3xl font-semibold whitespace-nowrap text-slate-50">Truth Seeker</span>
                 </div>
-                <div className="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+                <div className="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse text-indigo-900">
                     <FlagDropdown
                     value={language}
                     onChange={handleLanguageChange}
