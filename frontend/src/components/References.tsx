@@ -1,23 +1,24 @@
 import React from 'react';
 
 const ReferenceTab = ({ refNumber, title, url }) => (
+  <div className="rounded-md py-2 pl-1 font-normal text-indigo-950 hover:bg-indigo-200 transition duration-150 ease-in-out my-1 min-w-20">
     <a
+      className=""
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-block bg-indigo-100 rounded-lg py-2 px-3 text-sm font-normal text-indigo-950 hover:bg-indigo-200 transition duration-150 ease-in-out m-1 min-w-40 max-w-60"
     >
-      <span className="font-bold">[{refNumber}]</span>
-      <span className="block">{title}</span>
+      <span className="">[{refNumber}]</span>
+      <span className="ml-1">{title}</span>
     </a>
+    </div>
   );
 
 const References = ({ references, referenceTitle }) => {
     return (
         references.length > 0 && (
-            <div className="mt-10 ">
-              {/* <h2 className="">{referenceTitle}</h2> */}
-              <div className="flex flex-wrap text-center break-words justify-items-stretch">
+            <div className="mt-10 border-t-indigo-900 border-t-4 pt-6 text-lg">
+              <div className="break-words">
                 {references.map((ref, index) => (
                   <ReferenceTab
                     key={index}

@@ -111,8 +111,8 @@ def get_content(state, queries, tavily):
     
     logger.info("Getting content and references")
 
-    references = state["references"] or set()
-    contents = state["content"] or set()
+    references = state.get("references") or set()
+    contents = state.get("content") or set()
     ref_num = 0
     for q in queries:
         response = tavily.search(query=q, max_results=TAVILY_MAX_RESULTS)

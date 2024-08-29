@@ -8,11 +8,13 @@ import logging
 
 import boto3
 from botocore.exceptions import ClientError
+from dotenv import load_dotenv 
 
 logger = logging.getLogger()
 logger.setLevel("INFO")
 
 def is_environment_variables_set():
+    load_dotenv()
     if os.getenv("OPENAI_API_KEY") and os.getenv("TAVILY_API_KEY"):
         return True
     else:

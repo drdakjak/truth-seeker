@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { get } from 'aws-amplify/api';
 import NavBar from './NavBar';
@@ -32,8 +32,8 @@ const Search = () => {
         }
       }).response;
       const data = await response.body.json();
-      const content = data["content"];
-      const references = data["references"];
+      const content = data ? data["content"] : t("errorMsg");
+      const references = data ? data["references"] : [];
       console.log(data)
       setResponse(content);
       setReferences(references);
@@ -92,13 +92,12 @@ const Search = () => {
         {response && (
           <div className="bg-slate-50 fade-in mt-3 shadow-xl rounded-lg overflow-hidden border-4">
             <div className="p-6 font-sans">
-
               <ReactMarkdown
                 className="bg-slate-50 text-indigo-950 text-2xl font-light leading-relaxed"
                 components={{
-                  h1: ({ node, ...props }) => <h1 className="tracking-tight text-center p-5 my-10 text-4xl md:text-5xl 2xl:text-6xl leading-snag font-serif font-medium border-b-4 border-indigo-900" {...props} />,
-                  h2: ({ node, ...props }) => <h2 className="font-serif font-medium mt-6 mb-3 py-2 text-3xl md:text-4xl 2xl:text-5xl" {...props} />,
-                  h3: ({ node, ...props }) => <h3 className="my-4 font-medium underline underline-offset-2" {...props} />,
+                  h1: ({ node, ...props }) => <h1 className="font-mate font-medium tracking-tight text-center p-5 my-10 text-5xl md:text-6xl 2xl:text-7xl leading-snag  border-b-4 border-indigo-900" {...props} />,
+                  h2: ({ node, ...props }) => <h2 className="font-light mt-6 mb-3 py-2 text-3xl md:text-4xl 2xl:text-5xl" {...props} />,
+                  h3: ({ node, ...props }) => <h3 className="my-4 font-light underline underline-offset-2" {...props} />,
                   p: ({ node, ...props }) => <p className="indent-5" {...props} />,
                   ul: ({ node, ...props }) => <ul className="" {...props} />,
                   li: ({ node, ...props }) => <li className="" {...props} />,
@@ -111,9 +110,9 @@ const Search = () => {
             </div>
           </div>
         )}
-        {/* </div> */}
+        </div>
 
-      </div>
+      {/* </div> */}
       {loading && <Spinner loading={loading} textSequence={textSequence} />}
     </div>
   );

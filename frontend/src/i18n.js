@@ -22,6 +22,7 @@ const resources = {
       "searchPlaceholder": "Feed the Rabbit with a Question", //"Enter your question",
       "referenceTitle": "References",
       "textSequence": ['Loading', 'Scanning the internet', 'Generating content', 'Critically thinking', 'Almost there', 'Please wait'],
+      "errorMsg": "Sorry, something went wrong - we have a bug.",
       "language": "en",
       "suggestions": [
         "Was the 9/11 attack orchestrated by the U.S. government or did officials have insider knowledge?",
@@ -48,6 +49,7 @@ const resources = {
       "searchPlaceholder": "Nakrm králíka otázkou", //"Zadejte svou otázku",
       "textSequence": ['Čteme internety', 'Chroupáme výsledky', 'Přemýšlíme', 'Vytváříme obsah', 'Skoro hotovo'],
       "referenceTitle": "Zroje",
+      "errorMsg": "Omlouváme se, něco se pokazilo - máme blechy v kódu.",
       "language": "cs",
       "suggestions": [
         "Je změna klimatu skutečná?",
@@ -72,6 +74,7 @@ const resources = {
       "searchButton": "Füttere", // "Suche",
       "searchPlaceholder": "Füttere den Hasen mit einer Frage", //"Geben Sie Ihre Frage ein",
       "referenceTitle": "Referenzen",
+      "errorMsg": "Entschuldigung, etwas ist schief gelaufen - wir haben einen Fehler.",
       "language": "de",
       "textSequence": ['Internet wird durchsucht', 'Bitte warte', 'Fast fertig'],
       "suggestions": [
