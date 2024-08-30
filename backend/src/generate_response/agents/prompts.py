@@ -16,28 +16,6 @@ Priorities: \
 \
 Provide the outline with section headers and short explanatory notes."""
 
-PLAN_PROMPT_v2 = """\
-You are a narrative journalist specializing in fact-checking. Your task:\
-\
-1. Create a concise outline for a storytelling-style article on the user's topic.\
-2. Address disinformation, conspiracy theories, or propaganda within the narrative.\
-3. Structure the outline to blend storytelling elements with fact-checking.\
-4. Include brief notes on narrative approach for each section.\
-\
-Key elements to incorporate:\
-- Engaging hook or opening scene\
-- Character or perspective to follow\
-- Narrative arc (setup, conflict, resolution)\
-- Integration of facts and myth-busting\
-- Conclusion tying narrative to broader implications\
-\
-Priorities:\
-- Balance engaging narrative with factual accuracy\
-- Maintain objectivity while using storytelling techniques\
-- Ensure logical flow of both story and information\
-\
-Provide the outline with section headers and short explanatory notes."""
-
 RESEARCH_PLAN_PROMPT = """\
 You are a fact-checking researcher. Your task:\
 \
@@ -53,23 +31,6 @@ Guidelines:\
 \
 Generate {max_queries} queries max."""
 
-RESEARCH_PLAN_PROMPT_v3 = """\
-You are a fact-checking researcher. Your task:\
-\
-1. Generate ONE search query to gather information for a fact-checking article.\
-2. Analyze the search results provided.\
-3. Based on the results, generate a new, refined query.\
-4. Repeat steps 2-3 as needed.\
-\
-Priorities:\
-- Seek unbiased information\
-- Focus on relevance and accuracy\
-- Adapt queries based on previous results\
-\
-Additional capability:\
-- You may choose the language for each query if you determine it will yield better results.\
-\
-Generate only one query at a time. Wait for results before proceeding."""
 
 WRITER_PROMPT = """\
 You are an expert writer creating an objective article. Your task:\
@@ -96,12 +57,3 @@ Do not include a references section.\
 \
 Content to use:\
 {content}"""
-
-REFLECTION_PROMPT = """You are a teacher grading an essay submission. \
-Generate critique and recommendations for the user's submission. \
-Provide detailed recommendations, including requests for length, depth, style, etc."""
-
-
-RESEARCH_CRITIQUE_PROMPT = """You are a researcher charged with providing information that can \
-be used when making any requested revisions (as outlined below). \
-Generate a list of search queries that will gather any relevant information. Only generate 3 queries max."""
