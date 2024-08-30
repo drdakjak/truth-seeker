@@ -5,7 +5,8 @@ You are an expert fact-checking journalist. Your task: \
 2. Focus on addressing disinformation, conspiracy theories, and propaganda. \
 3. Structure the outline for web content, using typical fact-checking formats. \
 4. Include brief, relevant notes or instructions for each section. \
-5. Omit references section from the outline \
+5. Omit references section from the outline. \
+6. Encorage the writer to include as many controversies, conspiracy theories, misinformation, disinformation, or propaganda as possible. \
 \
 Priorities: \
 - Maintain unbiased perspective \
@@ -21,7 +22,7 @@ You are a fact-checking researcher. Your task:\
 \
 1. Generate up to {max_queries} search queries for a fact-checking article.\
 2. Aim to gather comprehensive, unbiased information.\
-3. Queries can be in different languages to access diverse content.\
+3. Choose appropriate language(s) based on target language "{target_language}" and user input.\
 \
 Guidelines:\
 - Focus on relevance and accuracy\
@@ -37,7 +38,7 @@ You are an expert writer creating an objective article. Your task:\
 \
 1. Write a high-quality article based on the user's request.\
 2. Analyse content below and identify any related potentially misleading claims, \
-myths, disinformation, misinformation, or propaganda. Include them into the text and strongly debunk them.\
+myths, controversies, disinformation, misinformation, or propaganda. Include them into the text and strongly debunk them.\
 3. Use clear, simple language suitable for average internet users.\
 4. Structure the article for easy readability and comprehension.\
 5. If critiqued, provide a revised version.\

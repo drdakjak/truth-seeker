@@ -4,7 +4,7 @@ import logging
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from langchain_core.pydantic_v1 import BaseModel
 
-from config import TAVILY_MAX_RESULTS, DEBUG_MODE
+from config import TAVILY_MAX_RESULTS, DEBUG_MODE, MAX_QUERIES
 from clients import get_model, get_tavily
 from agents.state import AgentState
 from agents import prompts
@@ -97,8 +97,9 @@ def get_queries(state: AgentState, model):
 
     logger.info("Getting queries")
 
-    prompt = prompts.RESEARCH_PLAN_PROMPT.format(max_queries=TAVILY_MAX_RESULTS)
-
+    prompt = prompts.RESEARCH_PLAN_PROMPT.format(
+        max_queries=MAX_QUERIES, target_language=state["target_language"]
+    )
     user_prompt = f"This is the subject matter: {state['task']}"
     user_prompt += "\n\n ------------------ \n\n"
     user_prompt += f"Here is the outline of the fact-checking article:\n{state['plan']}"
