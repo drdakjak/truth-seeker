@@ -122,7 +122,9 @@ def get_content(state, queries, tavily):
     for q in queries:
         response = tavily.search(query=q, max_results=TAVILY_MAX_RESULTS)
         for r in response["results"]:
-            content = f"REFERENCE: {ref_num}\n\n" + r["content"]
+            content = f"REFERENCE: {ref_num}\n"
+            content += f"SEARCH QUERY: {q}\n"
+            content += f"CONTENT: {r['content']}"
             contents.add(content)
             references.add((ref_num, r["title"], r["url"]))
             ref_num += 1

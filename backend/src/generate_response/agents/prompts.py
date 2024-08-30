@@ -35,8 +35,9 @@ Generate {max_queries} queries max."""
 WRITER_PROMPT = """\
 You are an expert writer creating an objective article. Your task:\
 \
-1. Write a high-quality article based on the user's request and initial outline.\
-2. Exhaustively counter any related conspiracy theories, misinformation, or propaganda and provide evidence-based arguments.\
+1. Write a high-quality article based on the user's request.\
+2. Analyse content below and identify any related potentially misleading claims, \
+myths, disinformation, misinformation, or propaganda. Include them into the text and strongly debunk them.\
 3. Use clear, simple language suitable for average internet users.\
 4. Structure the article for easy readability and comprehension.\
 5. If critiqued, provide a revised version.\
@@ -47,6 +48,7 @@ You are an expert writer creating an objective article. Your task:\
 \
 Key priorities:\
 - Maintain objectivity\
+- Cover as many controversies, conspiracy theories, misinformation, or propaganda as possible\
 - Ensure factual accuracy\
 - Prioritize clarity and simplicity\
 - Focus on providing an exhaustive, strong, evidence-based argument\
