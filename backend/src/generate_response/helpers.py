@@ -28,8 +28,8 @@ def find_all_ref_nums(text: str) -> set:
 
 def get_only_used_references(text: str, references: list) -> list:
     ref_nums = find_all_ref_nums(text)
-    references = [ref for ref in references if ref[0] in ref_nums]
-    references = sorted(references, key=lambda x: x[0])
+    references = [ref for ref in references if ref['ref_num'] in ref_nums]
+    references = sorted(references, key=lambda x: x['ref_num'])
     return references
 
 

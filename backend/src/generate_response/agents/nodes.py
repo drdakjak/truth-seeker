@@ -161,6 +161,7 @@ def get_controversies(state: AgentState, model):
             HumanMessage(content=user_promp),
         ]
     )
+    controversies = controversies.controversies
     logger.info(f"Controversies found: {controversies}")
     return controversies
 
@@ -169,7 +170,7 @@ def content_analyzer_node(state: AgentState):
 
     controversies = get_controversies(state)
 
-    return {"controversies": controversies.controversies}
+    return {"controversies": controversies}
 
 
 @inject_model(model=MODEL)

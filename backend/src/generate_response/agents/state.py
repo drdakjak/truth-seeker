@@ -8,4 +8,4 @@ class AgentState(TypedDict):
     references: Set[Tuple[str, str]]
     queries: List[str]
     content: Set[str]
-    cotroversies: list[str]
+    controversies: list[str]

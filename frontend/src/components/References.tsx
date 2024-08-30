@@ -22,9 +22,9 @@ const References = ({ references, referenceTitle }) => {
                 {references.map((ref, index) => (
                   <ReferenceTab
                     key={index}
-                    refNumber={ref[0]}
-                    title={ref[1]}
-                    url={ref[2]} />
+                    refNumber={ref['ref_num']}
+                    title={ref['title']}
+                    url={ref['url']} />
                 ))}
               </div>
             </div>
