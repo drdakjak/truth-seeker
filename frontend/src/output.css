@@ -732,6 +732,14 @@ body {
   margin-top: 0.25rem;
 }
 
+.ml-8 {
+  margin-left: 2rem;
+}
+
+.ml-5 {
+  margin-left: 1.25rem;
+}
+
 .flex {
   display: flex;
 }
@@ -1103,6 +1111,18 @@ body {
 
 .indent-5 {
   text-indent: 1.25rem;
+}
+
+.indent-8 {
+  text-indent: 2rem;
+}
+
+.indent-1 {
+  text-indent: 0.25rem;
+}
+
+.indent-2 {
+  text-indent: 0.5rem;
 }
 
 .font-mate {
