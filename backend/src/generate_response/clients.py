@@ -3,14 +3,13 @@ import os
 import boto3
 from langchain_openai import ChatOpenAI
 from tavily import TavilyClient
-from config import OPENAI_MODEL_NAME
 from load_secrets import load_secrets
 
 load_secrets()
 
-def get_model():
+def get_model(model_name: str):
     return ChatOpenAI(
-        model=OPENAI_MODEL_NAME, temperature=0, api_key=os.environ.get("OPENAI_API_KEY")
+        model=model_name, temperature=0, api_key=os.environ.get("OPENAI_API_KEY")
     )
 
 
