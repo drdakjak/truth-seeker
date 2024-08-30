@@ -18,7 +18,7 @@ const Spinner = ({ textSequence, loading }) => {
     }, [loading]);
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4">
+            <div className="bg-slate-50 p-6 rounded-lg shadow-lg flex items-center space-x-4">
                 <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
                 <div className="text-center">
                     <p className="text-lg font-semibold text-gray-800">{textSequence[currentTextIndex]}</p>

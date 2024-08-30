@@ -9,12 +9,13 @@ const SearchBar = ({ input, setInput, placeholder, searchButton, handleSearch })
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                 </svg>
             </div>
-            <input
-                type="text"
+            <textarea
+                // type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={placeholder}
-                className="caret-indigo-500 select-all md:select-text w-full pl-12 pr-12 py-3 text-sm md:text-xl  2xl:text-xl border-2 border-indigo-500 rounded-lg focus:ring-2 focus:ring-indigo-800 focus:border-indigo-800"
+                rows={1}
+                className="mt-1 overflow-y-hidden resize-none top-1/2 caret-indigo-500 break-words select-all md:select-text w-full pl-12 pr-12 py-3 text-sm md:text-xl  2xl:text-xl border-2 border-indigo-500 rounded-lg focus:ring-2 focus:ring-indigo-800 focus:border-indigo-800"
             />
 
             <button

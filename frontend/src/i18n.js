@@ -24,6 +24,7 @@ const resources = {
       "textSequence": ['Loading', 'Scanning the internet', 'Generating content', 'Critically thinking', 'Almost there', 'Please wait'],
       "errorMsg": "Sorry, something went wrong - we have a bug.",
       "language": "en",
+      "warning": "Warning: This is a prototype. The final text may be inaccurate, biased, and very, very faulty!",
       "suggestions": [
         "Was the 9/11 attack orchestrated by the U.S. government or did officials have insider knowledge?",
         "Is climate change real?",
@@ -51,6 +52,7 @@ const resources = {
       "referenceTitle": "Zroje",
       "errorMsg": "Omlouváme se, něco se pokazilo - máme blechy v kódu.",
       "language": "cs",
+      "warning": "Pozor: Toto je prototyp. Výsledný text může být nepřesný, zaujatý a velmi, velmi chybný!",
       "suggestions": [
         "Je změna klimatu skutečná?",
         "Jiří Lexa a kvantová cesta",
@@ -77,6 +79,7 @@ const resources = {
       "errorMsg": "Entschuldigung, etwas ist schief gelaufen - wir haben einen Fehler.",
       "language": "de",
       "textSequence": ['Internet wird durchsucht', 'Bitte warte', 'Fast fertig'],
+      "warning": "Warnung: Dies ist ein Prototyp. Der endgültige Text kann ungenau, voreingenommen und sehr, sehr fehlerhaft sein!",
       "suggestions": [
         "Ist der Klimawandel real?",
         "Ist Angela Merkel ein Reptil?"

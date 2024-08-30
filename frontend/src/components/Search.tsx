@@ -7,7 +7,8 @@ import { useTranslation } from 'react-i18next';
 import Suggestions from './Suggestion';
 import Spinner from './Spinner';
 import SearchBar from './SearchBar';
-
+import { Toast } from "flowbite-react";
+import { PiRabbitThin } from "react-icons/pi";
 import logo from '../../public/logo-white.svg';
 
 const Search = () => {
@@ -17,6 +18,7 @@ const Search = () => {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [references, setReferences] = useState([]);
+  const [alert, setAlert] = useState(true);
   const textSequence = t('textSequence', { returnObjects: true });
 
   const suggestions = t('suggestions', { returnObjects: true });
@@ -56,6 +58,7 @@ const Search = () => {
         language={language}
         setLanguage={setLanguage}
       />
+
       <div className="max-w-5xl mx-auto pt-20">
         <div className="flex items-center justify-center mb-12">
           <div>
@@ -93,32 +96,47 @@ const Search = () => {
             </div>
           </div>
         </div>
-        {response && (
-          <div className="bg-slate-50 fade-in mt-3 shadow-xl rounded-lg overflow-hidden border-4">
-            <div className="p-6 font-sans">
-              <ReactMarkdown
-                className="bg-slate-50 text-indigo-950 text-xl font-light leading-relaxed"
-                components={{
-                  h1: ({ node, ...props }) => <h1 className="font-mate font-medium tracking-tight text-center p-5 my-10 text-4xl md:text-5xl 2xl:text-6xl leading-snag  border-b-4 border-indigo-900" {...props} />,
-                  h2: ({ node, ...props }) => <h2 className="mt-6 mb-3 py-2 text-2xl md:text-3xl 2xl:text-4xl" {...props} />,
-                  h3: ({ node, ...props }) => <h3 className="my-4 underline underline-offset-2" {...props} />,
-                  p: ({ node, ...props }) => <p className="indent-2" {...props} />,
-                  ul: ({ node, ...props }) => <ul className="" {...props} />,
-                  li: ({ node, ...props }) => <li className="" {...props} />,
 
-                }}
-              >
-                {response}
-              </ReactMarkdown>
-              <References references={references} referenceTitle={t('referenceTitle')} />
+        {response && (
+          <div className="">
+            <div className="bg-slate-50 fade-in mt-3 shadow-xl rounded-lg overflow-hidden border-4">
+              <div className="p-6 font-sans">
+                <ReactMarkdown
+                  className="bg-slate-50 text-indigo-950 text-xl font-light leading-relaxed"
+                  components={{
+                    h1: ({ node, ...props }) => <h1 className="font-mate font-medium tracking-tight text-center p-5 my-10 text-4xl md:text-5xl 2xl:text-6xl leading-snag  border-b-4 border-indigo-900" {...props} />,
+                    h2: ({ node, ...props }) => <h2 className="mt-6 mb-3 py-2 text-2xl md:text-3xl 2xl:text-4xl" {...props} />,
+                    h3: ({ node, ...props }) => <h3 className="my-4 underline underline-offset-2" {...props} />,
+                    p: ({ node, ...props }) => <p className="indent-2" {...props} />,
+                    ul: ({ node, ...props }) => <ul className="" {...props} />,
+                    li: ({ node, ...props }) => <li className="" {...props} />,
+
+                  }}
+                >
+                  {response}
+                </ReactMarkdown>
+                <References references={references} referenceTitle={t('referenceTitle')} />
+              </div>
             </div>
           </div>
         )}
       </div>
+      {response && alert &&
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+          <Toast className="bg-slate-50 p-6 rounded-lg shadow-lg">
+            <div className="inline-flex p-2 shrink-0 items-center justify-center rounded-lg bg-red-600 text-black">
+              <PiRabbitThin className="h-8 w-8" />
+            </div>
+            <div className="ml-3 font-sans text-indigo-900">{t("warning")}</div>
+            <Toast.Toggle className="bg-indigo-600 hover:bg-indigo-700 text-slate-50 hover:text-slate-50 scale-110"
+              onDismiss={() => setAlert(false)}
+            />
 
-      {/* </div> */}
+          </Toast>
+        </div>
+      }
       {loading && <Spinner loading={loading} textSequence={textSequence} />}
-    </div>
+    </div >
   );
 };
 

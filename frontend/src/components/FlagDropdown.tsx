@@ -18,12 +18,11 @@ const FlagDropdown: React.FC<FlagDropdownProps> = ({ value, onChange, options })
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="md: p-1 text-base md:text-lg 2xl:text-xl focus:outline-none appearance-none bg-transparent text-grey-50 font-medium"
+        className="rounded-lg border-0 p-1 text-base md:text-lg 2xl:text-xl appearance-none focus:outline-none focus:ring-0 text-grey-50 font-medium"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
-
           </option>
         ))}
       </select>

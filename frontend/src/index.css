@@ -1,4 +1,3 @@
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -21,21 +20,42 @@
   }
 
   @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+    }
   }
 
   @keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: #6366F1; } /* Matches the text color */
+
+    from,
+    to {
+      border-color: transparent;
+    }
+
+    50% {
+      border-color: #6366F1;
+    }
+
+    /* Matches the text color */
   }
 
-  
+
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  
+
   .fade-in {
     animation: fadeIn 1.0s ease-in;
   }
