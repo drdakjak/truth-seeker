@@ -11,9 +11,9 @@ import SearchBar from './SearchBar';
 const Search = () => {
   const { t } = useTranslation();
   const [input, setInput] = useState('');
+  const [language, setLanguage] = useState(t('language'));
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [language] = useState(t('language'));
   const [references, setReferences] = useState([]);
   const textSequence = t('textSequence', { returnObjects: true });
 
@@ -50,7 +50,10 @@ const Search = () => {
   };
   return (
     <div className="antialiased">
-      <NavBar />
+      <NavBar
+        language={language}
+        setLanguage={setLanguage}
+      />
       <div className="max-w-5xl mx-auto pt-20">
         <div className="flex items-center justify-center mb-12">
           {/* <img src={logo} alt="Truth Seeker Logo" className="h-32 mr-6" /> */}
@@ -110,7 +113,7 @@ const Search = () => {
             </div>
           </div>
         )}
-        </div>
+      </div>
 
       {/* </div> */}
       {loading && <Spinner loading={loading} textSequence={textSequence} />}

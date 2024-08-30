@@ -5,9 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import logo from '../../public/logo-white.svg';
 
-const NavBar = () => {
+const NavBar = ( {language, setLanguage} ) => {
   const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState(t('language'));
 
   const languageOptions = [
     { value: 'cs', label: 'Czech', flagCode: 'CZ' },
