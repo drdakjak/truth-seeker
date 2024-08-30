@@ -1,8 +1,8 @@
 from typing import List
 import logging
 
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
-from langchain_core.pydantic_v1 import BaseModel
+from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.pydantic_v1 import BaseModel, Field
 
 from config import TAVILY_MAX_RESULTS, DEBUG_MODE, MAX_QUERIES
 from clients import get_model, get_tavily
@@ -36,60 +36,61 @@ def inject_tavily(tavily):
     return decorator
 
 
-@inject_model(model=MODEL)
-def get_plan(state: AgentState, model):
-    logger.info("Getting plan")
-    messages = [
-        SystemMessage(content=prompts.PLAN_PROMPT),
-        HumanMessage(content=state["task"]),
-    ]
-    response = model.invoke(messages)
-    plan = response.content
-
-    logger.info(f"Plan generated: {plan}")
-    return plan
+def format_task_prompt(task: str):
+    return f"This is the subject matter: {task}\n\n"
 
 
-def plan_node(state: AgentState):
+def format_outline_prompt(outline: str):
+    return f"Here is the outline of the fact-checking article:\n{outline}\n\n"
 
-    plan = get_plan(state)
-    return {"plan": plan}
+
+def format_controversies_prompt(controversies: list):
+    controversies_str = "\n-------------------\n".join(controversies)
+
+    return f"Here are the controversies found:\n{controversies_str}\n\n"
+
+
+def format_content_entry(content: dict):
+
+    formated_entry = f"REFERENCE NUMBER: {content['ref_num']}\n"
+    formated_entry += f"SEARCH QUERY: {content['search_query']}\n"
+    formated_entry += (
+        f"CONTENT:\n{content['content']['title']}\n{content['content']['content']}"
+    )
+    return formated_entry
 
 
 def format_content(contents: list):
-
-    content = "\n-------------------\n".join(contents)
+    content = "\n-------------------\n".join(map(format_content_entry, contents))
     return content
 
 
+def format_content_prompt(contents: list):
+    return f"This is the content:\n{format_content(contents)}\n\n"
+
+
 @inject_model(model=MODEL)
-def get_draft(state: AgentState, model):
-
-    logger.info("Getting draft")
-
-    language = state["target_language"]
-    content = format_content(state["content"])
-    user_message = f"{state['task']}\n\nHere is my outline:\n\n{state['plan']}"
-
-    draft_promp = prompts.WRITER_PROMPT.format(content=content, language=language)
-    messages = [SystemMessage(content=draft_promp), HumanMessage(content=user_message)]
-
+def get_outline(state: AgentState, model):
+    logger.info("Getting outline")
+    messages = [
+        SystemMessage(content=prompts.OUTLINE_PROMPT),
+        HumanMessage(content=state["task"]),
+    ]
     response = model.invoke(messages)
-    draft = response.content
+    outline = response.content
 
-    logger.info(f"Draft generated: {draft}")
-    return draft
+    logger.info(f"Outline generated: {outline}")
+    return outline
 
 
-def writer_node(state: AgentState):
+def outline_node(state: AgentState):
 
-    draft = get_draft(state)
-
-    return {"draft": draft}
+    outline = get_outline(state)
+    return {"outline": outline}
 
 
 class Queries(BaseModel):
-    queries: List[str]
+    queries: List[str] = Field(description="list of seraech queries")
 
 
 @inject_model(model=MODEL)
@@ -97,12 +98,11 @@ def get_queries(state: AgentState, model):
 
     logger.info("Getting queries")
 
-    prompt = prompts.RESEARCH_PLAN_PROMPT.format(
+    prompt = prompts.RESEARCH_OUTLINE_PROMPT.format(
         max_queries=MAX_QUERIES, target_language=state["target_language"]
     )
-    user_prompt = f"This is the subject matter: {state['task']}"
-    user_prompt += "\n\n ------------------ \n\n"
-    user_prompt += f"Here is the outline of the fact-checking article:\n{state['plan']}"
+    user_prompt = format_task_prompt(state["task"])
+    user_prompt += format_outline_prompt(state["outline"])
 
     messages = [SystemMessage(content=prompt), HumanMessage(content=user_prompt)]
     queries = model.with_structured_output(Queries).invoke(messages)
@@ -117,17 +117,16 @@ def get_content(state, queries, tavily):
 
     logger.info("Getting content and references")
 
-    references = state.get("references") or set()
-    contents = state.get("content") or set()
+    references = state.get("references") or []
+    contents = state.get("content") or []
     ref_num = 0
     for q in queries:
         response = tavily.search(query=q, max_results=TAVILY_MAX_RESULTS)
         for r in response["results"]:
-            content = f"REFERENCE: {ref_num}\n"
-            content += f"SEARCH QUERY: {q}\n"
-            content += f"CONTENT: {r['content']}"
-            contents.add(content)
-            references.add((ref_num, r["title"], r["url"]))
+            content = {"ref_num": ref_num, "search_query": q, "content": r}
+            reference = {"ref_num": ref_num, "title": r["title"], "url": r["url"]}
+            contents.append(content)
+            references.append(reference)
             ref_num += 1
 
     logger.info(f"Content generated: {contents}")
@@ -136,8 +135,67 @@ def get_content(state, queries, tavily):
     return contents, references
 
 
-def research_plan_node(state: AgentState):
+def research_outline_node(state: AgentState):
     queries = get_queries(state)
     contents, references = get_content(state, queries)
 
     return {"content": contents, "queries": queries, "references": references}
+
+
+class Controversies(BaseModel):
+    controversies: List[str] = Field(
+        description="list of misinformation, disinformation or claims worth fact-checking"
+    )
+
+
+@inject_model(model=MODEL)
+def get_controversies(state: AgentState, model):
+
+    logger.info("Getting controversies")
+
+    user_promp = format_task_prompt(state["task"])
+    user_promp += format_content_prompt(state["content"])
+    controversies = model.with_structured_output(Controversies).invoke(
+        [
+            SystemMessage(content=prompts.CONTROVERSIES_PROMPT),
+            HumanMessage(content=user_promp),
+        ]
+    )
+    logger.info(f"Controversies found: {controversies}")
+    return controversies
+
+
+def content_analyzer_node(state: AgentState):
+
+    controversies = get_controversies(state)
+
+    return {"controversies": controversies.controversies}
+
+
+@inject_model(model=MODEL)
+def get_draft(state: AgentState, model):
+
+    logger.info("Getting draft")
+
+    language = state["target_language"]
+    content = format_content(state["content"])
+    draft_promp = prompts.WRITER_PROMPT.format(content=content, language=language)
+
+    user_prompt = format_task_prompt(state["task"])
+    user_prompt += format_outline_prompt(state["outline"])
+    user_prompt += format_controversies_prompt(state["controversies"])
+
+    messages = [SystemMessage(content=draft_promp), HumanMessage(content=user_prompt)]
+
+    response = model.invoke(messages)
+    draft = response.content
+
+    logger.info(f"Draft generated: {draft}")
+    return draft
+
+
+def writer_node(state: AgentState):
+
+    draft = get_draft(state)
+
+    return {"draft": draft}
