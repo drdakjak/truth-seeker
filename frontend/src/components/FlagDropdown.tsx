@@ -9,9 +9,9 @@ interface FlagDropdownProps {
 
 const FlagDropdown: React.FC<FlagDropdownProps> = ({ value, onChange, options }) => {
   return (
-    <div className="flex-wrap p-1 bg-slate-50 rounded-lg">
+    <div className="flex-wrap  bg-slate-50 rounded-lg">
       <ReactCountryFlag
-      className="w-full h-full mr-1"
+      className="w-full h-full mx-1"
         countryCode={options.find((option) => option.value === value).flagCode} 
         svg
       />

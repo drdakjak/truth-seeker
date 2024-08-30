@@ -8,6 +8,8 @@ import Suggestions from './Suggestion';
 import Spinner from './Spinner';
 import SearchBar from './SearchBar';
 
+import logo from '../../public/logo-white.svg';
+
 const Search = () => {
   const { t } = useTranslation();
   const [input, setInput] = useState('');
@@ -56,10 +58,9 @@ const Search = () => {
       />
       <div className="max-w-5xl mx-auto pt-20">
         <div className="flex items-center justify-center mb-12">
-          {/* <img src={logo} alt="Truth Seeker Logo" className="h-32 mr-6" /> */}
           <div>
             <div className="">
-              <h1 className="text-center text-6xl md:text-8xl 2xl:text-9xl font-extrabold text-gray-50 font-serif tracking-tight">{t('appTitle')}</h1>
+              <h1 className="flex text-center text-6xl md:text-8xl 2xl:text-9xl font-extrabold text-gray-50 font-serif tracking-tight">{t('appTitle')} </h1>
               <p className="app-subtitle text-center text-2xl md:text-4xl 2xl:text-5xl text-indigo-300 font-light mt-2">{t('appSubtitle')}</p>
             </div>
           </div>
