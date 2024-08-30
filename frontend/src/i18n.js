@@ -53,7 +53,7 @@ const resources = {
       "language": "cs",
       "suggestions": [
         "Je změna klimatu skutečná?",
-        "Ovládají svět ve skutečnosti mimozemšťané?",
+        "Jiří Lexa a kvantová cesta",
         "Byl virus COVID-19 uměle vytvořen nebo je spojen s technologií 5G?"
       ]
     }
