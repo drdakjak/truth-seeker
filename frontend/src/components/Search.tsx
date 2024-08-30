@@ -93,11 +93,11 @@ const Search = () => {
           <div className="bg-slate-50 fade-in mt-3 shadow-xl rounded-lg overflow-hidden border-4">
             <div className="p-6 font-sans">
               <ReactMarkdown
-                className="bg-slate-50 text-indigo-950 text-2xl font-light leading-relaxed"
+                className="bg-slate-50 text-indigo-950 text-xl font-light leading-relaxed"
                 components={{
-                  h1: ({ node, ...props }) => <h1 className="font-mate font-medium tracking-tight text-center p-5 my-10 text-5xl md:text-6xl 2xl:text-7xl leading-snag  border-b-4 border-indigo-900" {...props} />,
-                  h2: ({ node, ...props }) => <h2 className="font-light mt-6 mb-3 py-2 text-3xl md:text-4xl 2xl:text-5xl" {...props} />,
-                  h3: ({ node, ...props }) => <h3 className="my-4 font-light underline underline-offset-2" {...props} />,
+                  h1: ({ node, ...props }) => <h1 className="font-mate font-medium tracking-tight text-center p-5 my-10 text-4xl md:text-5xl 2xl:text-6xl leading-snag  border-b-4 border-indigo-900" {...props} />,
+                  h2: ({ node, ...props }) => <h2 className="mt-6 mb-3 py-2 text-2xl md:text-3xl 2xl:text-4xl" {...props} />,
+                  h3: ({ node, ...props }) => <h3 className="my-4 underline underline-offset-2" {...props} />,
                   p: ({ node, ...props }) => <p className="indent-5" {...props} />,
                   ul: ({ node, ...props }) => <ul className="" {...props} />,
                   li: ({ node, ...props }) => <li className="" {...props} />,
