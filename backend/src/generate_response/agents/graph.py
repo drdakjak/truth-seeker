@@ -5,8 +5,6 @@ from agents import state
 
 
 def build_graph():
-    checkpointer = MemorySaver()
-
     builder = StateGraph(state.AgentState)
     builder.add_node("planner_node", nodes.plan_node)
     builder.add_node("research_plan_node", nodes.research_plan_node)
@@ -17,7 +15,7 @@ def build_graph():
 
     builder.set_entry_point("planner_node")
 
-    graph = builder.compile(checkpointer=checkpointer)
+    graph = builder.compile()
     return graph
 
 
