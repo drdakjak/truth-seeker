@@ -35,7 +35,7 @@ const Search = () => {
       console.log(`generate_response/${language}/${encodedUriInput}`)
       const response = await get({
         apiName: "TruthSeekerRestApi",
-        path: `generate_response/v0/${language}/${encodedUriInput}`,
+        path: `generate_response/v1/${language}/${encodedUriInput}`,
         options: {
           headers: { 'Content-Type': 'application/json' }
         }
