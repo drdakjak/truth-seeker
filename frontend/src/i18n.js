@@ -25,6 +25,7 @@ const resources = {
       "errorMsg": "Sorry, something went wrong - we have a bug.",
       "language": "en",
       "warning": "Warning: This is a prototype. The final text may be inaccurate, biased, and very, very faulty!",
+      "ratingText": "Was this article helpful?",
       "suggestions": [
         "Was the 9/11 attack orchestrated by the U.S. government or did officials have insider knowledge?",
         "Is climate change real?",
@@ -53,6 +54,7 @@ const resources = {
       "errorMsg": "Omlouváme se, něco se pokazilo - máme blechy v kódu.",
       "language": "cs",
       "warning": "Pozor: Toto je prototyp. Výsledný text může být nepřesný, zaujatý a velmi, velmi chybný!",
+      "ratingText": "Byl tento článek užitečný?",
       "suggestions": [
         "Je změna klimatu skutečná?",
         "Jiří Lexa a kvantová cesta",
@@ -80,6 +82,7 @@ const resources = {
       "language": "de",
       "textSequence": ['Internet wird durchsucht', 'Bitte warte', 'Fast fertig'],
       "warning": "Warnung: Dies ist ein Prototyp. Der endgültige Text kann ungenau, voreingenommen und sehr, sehr fehlerhaft sein!",
+      "ratingText": "War dieser Artikel hilfreich?",
       "suggestions": [
         "Ist der Klimawandel real?",
         "Ist Angela Merkel ein Reptil?"

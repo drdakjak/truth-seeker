@@ -1,12 +1,15 @@
 import React from 'react';
 
 import { FaFaceFrown, FaFaceSmile,  FaFaceGrinHearts } from "react-icons/fa6";
+import { useTranslation } from 'react-i18next';
 
 const Rating = ({ rating, handleRating }) => {
+    const { t } = useTranslation();
+
     return (
 
         <div className="mt-6 flex justify-center items-center">
-            <p className="mr-4 text-xl font-sans">Was this article helpful?</p>
+            <p className="mr-4 text-xl font-sans">{t("ratingText")}</p>
 
             <button
                 onClick={() => handleRating(0)}
