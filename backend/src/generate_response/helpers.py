@@ -1,8 +1,11 @@
 import logging
 from urllib.parse import unquote
+import uuid
+from config import DEBUG_MODE
 
 logger = logging.getLogger()
-logger.setLevel("INFO")
+logger.setLevel(logging.INFO if DEBUG_MODE else logging.ERROR)
+
 
 
 def find_all_ref_nums(text: str) -> set:
@@ -50,8 +53,18 @@ def get_parameters(event: dict) -> tuple:
     path_parameters = event["pathParameters"]
     query = unquote(path_parameters["query"])
     language = path_parameters["language"]
+    version = path_parameters["version"]
+
 
     logger.info(f"QUERY: {query}")
     logger.info(f"LANGUAGE: {language}")
+    logger.info(f"VERSION: {version}")
 
-    return query, language
+    return query, language, version
+
+def get_request_id() -> str:
+    return uuid.uuid4().hex
+
+def add_request_id_to_body(body: dict, request_id: str) -> dict:
+    body["request_id"] = request_id
+    return body

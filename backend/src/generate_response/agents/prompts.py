@@ -1,7 +1,7 @@
 OUTLINE_PROMPT = """\
 You are an expert fact-checking journalist. Your task: \
 \
-1. Create a concise, high-level outline for a fact-checking article on the user's topic. \
+1. Create a concise, high-level outline for a fact-checking article on the user's topic. Put at the beginning a concise summary of findings.\
 2. Focus on addressing disinformation, conspiracy theories, and propaganda. \
 3. Structure the outline for web content, using typical fact-checking formats. \
 4. Include brief, relevant notes or instructions for each section. \

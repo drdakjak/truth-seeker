@@ -1,9 +1,3 @@
-# This AWS SAM template has been generated from your function's configuration. If
-# your function has one or more triggers, note that the AWS resources associated
-# with these triggers aren't fully specified in this template and include
-# placeholder values. Open this template in AWS Application Composer or your
-# favorite IDE and modify it to specify a serverless application with other AWS
-# resources.
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: An AWS Serverless Application Model template describing your function.
@@ -23,7 +17,7 @@ Resources:
       Description: ''
       MemorySize: 128
       Timeout: 900
-      Handler: lambda_function.lambda_handler
+      Handler: handler.lambda_handler
       Runtime: python3.11
       Architectures:
         - x86_64
@@ -37,6 +31,7 @@ Resources:
         Variables:
           SECRET_NAME: !Ref SecretName
           REGION_NAME: !Ref AWS::Region
+          RATINGS_TABLE_NAME: !Ref UserRatingsTable
           OPENAI_API_KEY: ''
           TAVILY_API_KEY: ''
       Policies:
@@ -56,17 +51,36 @@ Resources:
                 - logs:PutLogEvents
               Resource:
                 - !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/GenerateResponse:*
+            - Effect: Allow
+              Action:
+                - dynamodb:PutItem
+              Resource: !GetAtt UserRatingsTable.Arn
       SnapStart:
         ApplyOn: None
       RuntimeManagementConfig:
         UpdateRuntimeOn: Auto
       Events:
-        TruthSeekerRestApiGETgenerateresponsequery:
+        TruthSeekerRestApiGETgenerateresponse:
           Type: Api
           Properties:
-            Path: /generate_response/{language}/{query}
+            Path: /generate_response/{version}/{language}/{query}
             Method: GET
             RestApiId: !Ref TruthSeekerRestApi
+
+  UserRatingsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: UserRatings
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
   TruthSeekerRestApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -74,23 +88,23 @@ Resources:
         - ${ResourceName}
         - ResourceName: TruthSeekerRestApi
       StageName: dev
-      # CacheClusterEnabled: true
-      # CacheClusterSize: '0.5'
-      # MethodSettings:
-      #   - CachingEnabled: true
-      #     CacheTtlInSeconds: 3600
-      #     HttpMethod: '*'
-      #     ResourcePath: '/*'
       DefinitionBody:
         openapi: '3.0'
         info: {}
         paths:
-          /generate_response/{language}/{query}:
+          /generate_response/{version}/{language}/{query}:
             get:
               x-amazon-apigateway-integration:
                 httpMethod: POST
                 type: aws_proxy
                 uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GenerateResponse.Arn}/invocations
+              responses: {}
+          /rate_response:
+            post:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RateResponse.Arn}/invocations
               responses: {}
           /health:
             get:
@@ -105,6 +119,7 @@ Resources:
         AllowOrigin: '''*'''
         AllowHeaders: '''Content-Type'''
         AllowMethods: '''OPTIONS, POST, GET'''
+
   HealthCheck:
     Type: AWS::Serverless::Function
     Properties:
@@ -112,7 +127,7 @@ Resources:
         - Stack ${AWS::StackName} Function ${ResourceName}
         - ResourceName: HealthCheck
       CodeUri: ./src/health_check
-      Handler: handler.handler
+      Handler: handler.lambda_handler
       Runtime: python3.11
       MemorySize: 3008
       Timeout: 30
@@ -124,6 +139,7 @@ Resources:
             Path: /health
             Method: GET
             RestApiId: !Ref TruthSeekerRestApi
+
   HealthCheckLogGroup:
     Type: AWS::Logs::LogGroup
     DeletionPolicy: Retain
@@ -169,9 +185,42 @@ Resources:
       BranchName: main
       AppId: !GetAtt TruthSeekerAmplifyApp.AppId
       EnableAutoBuild: true
-  prodTest:
-    Type: AWS::SecretsManager::Secret
-    Properties: {}
+
+  RateResponse:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: RateResponse
+      CodeUri: ./src/rate_response
+      Handler: handler.lambda_handler
+      Runtime: python3.11
+      MemorySize: 128
+      Timeout: 30
+      Tracing: Active
+      Events:
+        TruthSeekerRestApiPOSTrateresponse:
+          Type: Api
+          Properties:
+            Path: /rate_response
+            Method: POST
+            RestApiId: !Ref TruthSeekerRestApi
+      Environment:
+        Variables:
+          RATINGS_TABLE_NAME: !Ref UserRatingsTable
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - dynamodb:UpdateItem
+              Resource: !GetAtt UserRatingsTable.Arn
+
+  RateResponseLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Retain
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${RateResponse}
 
 Metadata:
   AWS::Composer::Groups:
@@ -179,6 +228,7 @@ Metadata:
       Label: API
       Members:
         - GenerateResponse
+        - RateResponse
         - HealthCheck
 
 Outputs:

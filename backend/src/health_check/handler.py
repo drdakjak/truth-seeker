@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger()
 logger.setLevel("INFO")
 
-def handler(event, context):
+def lambda_handler(event, context):
     # Log the event argument for debugging and for use in local development.
     logger.info(json.dumps(event))
 

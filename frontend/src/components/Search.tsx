@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { get } from 'aws-amplify/api';
+import { get, post } from 'aws-amplify/api';
 import NavBar from './NavBar';
 import References from './References';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,8 @@ import Spinner from './Spinner';
 import SearchBar from './SearchBar';
 import { Toast } from "flowbite-react";
 import { PiRabbitThin } from "react-icons/pi";
+import Rating from './Rating';
+
 import logo from '../../public/logo-white.svg';
 
 const Search = () => {
@@ -19,18 +21,21 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [references, setReferences] = useState([]);
   const [alert, setAlert] = useState(true);
+  const [rating, setRating] = useState(null);
   const textSequence = t('textSequence', { returnObjects: true });
-
   const suggestions = t('suggestions', { returnObjects: true });
+  const [request_id, setRequestId] = useState(null);
 
   const handleSearch = async (input) => {
     setLoading(true);
+    setRating(null);
+
     try {
       const encodedUriInput = encodeURIComponent(input);
       console.log(`generate_response/${language}/${encodedUriInput}`)
       const response = await get({
         apiName: "TruthSeekerRestApi",
-        path: `generate_response/${language}/${encodedUriInput}`,
+        path: `generate_response/v0/${language}/${encodedUriInput}`,
         options: {
           headers: { 'Content-Type': 'application/json' }
         }
@@ -38,7 +43,10 @@ const Search = () => {
       const data = await response.body.json();
       const content = data ? data["content"] : t("errorMsg");
       const references = data ? data["references"] : [];
+      const request_id = data ? data["request_id"] : null;
       console.log(data)
+
+      setRequestId(request_id);
       setResponse(content);
       setReferences(references);
     } catch (error) {
@@ -48,17 +56,35 @@ const Search = () => {
     }
   };
 
+  const handleRating = async (value) => {
+    setRating(value);
+    console.log(value, request_id)
+    try {
+      const response = await post({
+        apiName: "TruthSeekerRestApi",
+        path: `rate_response`,
+        options: {
+          body: { rating: value, request_id: request_id}
+        }
+      }).response;
+      console.log(response);
+      console.log('Rating submitted successfully');
+    } catch (error) {
+      console.error('Error submitting rating:', error);
+    }
+  };
+
   const handleSuggestionClick = (suggestion: string) => {
     setInput(suggestion);
     handleSearch(suggestion);
   };
+
   return (
     <div className="antialiased">
       <NavBar
         language={language}
         setLanguage={setLanguage}
       />
-
       <div className="max-w-5xl mx-auto pt-20">
         <div className="flex items-center justify-center mb-12">
           <div>
@@ -110,11 +136,11 @@ const Search = () => {
                     p: ({ node, ...props }) => <p className="indent-2" {...props} />,
                     ul: ({ node, ...props }) => <ul className="" {...props} />,
                     li: ({ node, ...props }) => <li className="" {...props} />,
-
                   }}
                 >
                   {response}
                 </ReactMarkdown>
+                <Rating rating={rating} handleRating={handleRating} />
                 <References references={references} referenceTitle={t('referenceTitle')} />
               </div>
             </div>
@@ -131,12 +157,11 @@ const Search = () => {
             <Toast.Toggle className="bg-indigo-600 hover:bg-indigo-700 text-slate-50 hover:text-slate-50 scale-110"
               onDismiss={() => setAlert(false)}
             />
-
           </Toast>
         </div>
       }
       {loading && <Spinner loading={loading} textSequence={textSequence} />}
-    </div >
+    </div>
   );
 };
 

@@ -42,3 +42,6 @@ def test_is_environment_variables_set():
 
     expected_result = False
     assert is_environment_variables_set() == expected_result
+
+if __name__ == "__main__":
+    pytest.main()
