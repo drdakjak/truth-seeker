@@ -9,7 +9,7 @@ const Rating = ({ rating, handleRating }) => {
     return (
 
         <div className="mt-6 flex justify-center items-center">
-            <p className="mr-4 text-xl font-sans">{t("ratingText")}</p>
+            <p className="mr-4 text-xl font-sans text-indigo-950">{t("ratingText")}</p>
 
             <button
                 onClick={() => handleRating(0)}
