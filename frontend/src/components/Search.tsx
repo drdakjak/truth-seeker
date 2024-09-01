@@ -6,6 +6,7 @@ import References from './References';
 import { useTranslation } from 'react-i18next';
 import Suggestions from './Suggestion';
 import Spinner from './Spinner';
+import validateInput from './InputValidation';
 import SearchBar from './SearchBar';
 import { Toast } from "flowbite-react";
 import { PiRabbitThin } from "react-icons/pi";
@@ -25,8 +26,18 @@ const Search = () => {
   const textSequence = t('textSequence', { returnObjects: true });
   const suggestions = t('suggestions', { returnObjects: true });
   const [request_id, setRequestId] = useState(null);
+  const [error, setError] = useState('');
+
 
   const handleSearch = async (input) => {
+
+    const validationError = validateInput(input);
+    if (validationError) {
+      setError(validationError);
+      console.log('Validation error:', validationError);
+      return;
+    }
+
     setLoading(true);
     setRating(null);
 
@@ -40,6 +51,7 @@ const Search = () => {
           headers: { 'Content-Type': 'application/json' }
         }
       }).response;
+      console.log(response);
       const data = await response.body.json();
       const content = data ? data["content"] : t("errorMsg");
       const references = data ? data["references"] : [];
@@ -64,7 +76,7 @@ const Search = () => {
         apiName: "TruthSeekerRestApi",
         path: `rate_response`,
         options: {
-          body: { rating: value, request_id: request_id}
+          body: { rating: value, request_id: request_id }
         }
       }).response;
       console.log(response);
@@ -113,7 +125,19 @@ const Search = () => {
                   searchButton={t('searchButton')}
                   handleSearch={handleSearch} />
               </div>
-
+              {error &&
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+                  <Toast className="bg-slate-50 p-6 rounded-lg shadow-lg">
+                    <div className="inline-flex p-2 shrink-0 items-center justify-center rounded-lg bg-red-600 text-black">
+                      <PiRabbitThin className="h-8 w-8" />
+                    </div>
+                    <div className="ml-3 font-sans text-indigo-900">{t(error)}</div>
+                    <Toast.Toggle className="bg-indigo-600 hover:bg-indigo-700 text-slate-50 hover:text-slate-50 scale-110"
+                      onDismiss={() => setError('')}
+                    />
+                  </Toast>
+                </div>
+              }
               <div className="flex flex-wrap gap-2 mb-6">
                 <Suggestions
                   suggestions={suggestions}
@@ -147,7 +171,8 @@ const Search = () => {
           </div>
         )}
       </div>
-      {response && alert &&
+      {
+        response && alert &&
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
           <Toast className="bg-slate-50 p-6 rounded-lg shadow-lg">
             <div className="inline-flex p-2 shrink-0 items-center justify-center rounded-lg bg-red-600 text-black">
@@ -161,7 +186,7 @@ const Search = () => {
         </div>
       }
       {loading && <Spinner loading={loading} textSequence={textSequence} />}
-    </div>
+    </div >
   );
 };
 

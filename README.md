@@ -2,6 +2,14 @@
 
 This repository contains a serverless application designed to generate responses based on user's queries for fact-checking and information verification. The application uses OpenAI and Tavily API along with AWS Lambda, AWS Secrets Manager, and AWS Amplify to provide a scalable and secure solution.
 
+[<img src="./truth-seeker.png" height="320">](./truth-seeker.png)
+[<img src="./truth-seeker-response.png" height="320">](./truth-seeker-response.png)
+
+It implements a simple agent using [LangGraph](https://langchain-ai.github.io/langgraph/) that searches the internet, gathers information related to the user's query, and generates an article.
+
+[<img src="./agent-graph.png" height="320">](./agent-graph.png)
+
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)

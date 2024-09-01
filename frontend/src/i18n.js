@@ -26,6 +26,8 @@ const resources = {
       "language": "en",
       "warning": "Warning: This is a prototype. The final text may be inaccurate, biased, and very, very faulty!",
       "ratingText": "Was this article helpful?",
+      "disallowedChars": "Input contains disallowed characters.",
+      "inputTooLong": "Input is too long.",
       "suggestions": [
         "Was the 9/11 attack orchestrated by the U.S. government or did officials have insider knowledge?",
         "Is climate change real?",
@@ -55,6 +57,8 @@ const resources = {
       "language": "cs",
       "warning": "Pozor: Toto je prototyp. Výsledný text může být nepřesný, zaujatý a velmi, velmi chybný!",
       "ratingText": "Byl tento článek užitečný?",
+      "disallowedChars": "Text obsahuje nepovolené znaky.",
+      "inputTooLong": "Text je příliš dlouhý.",
       "suggestions": [
         "Je změna klimatu skutečná?",
         "Jiří Lexa a kvantová cesta",
@@ -83,6 +87,8 @@ const resources = {
       "textSequence": ['Internet wird durchsucht', 'Bitte warte', 'Fast fertig'],
       "warning": "Warnung: Dies ist ein Prototyp. Der endgültige Text kann ungenau, voreingenommen und sehr, sehr fehlerhaft sein!",
       "ratingText": "War dieser Artikel hilfreich?",
+      "disallowedChars": "Eingabe enthält unzulässige Zeichen.",
+      "inputTooLong": "Eingabe ist zu lang.",
       "suggestions": [
         "Ist der Klimawandel real?",
         "Ist Angela Merkel ein Reptil?"
