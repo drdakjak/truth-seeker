@@ -1,6 +1,7 @@
 {
     "pathParameters": {
         "language": "en",
-        "query": "Dezinform%C3%A1torsk%C3%A9%20%C5%BEn%C4%9B%20kv%C5%AFli%20ukrajinsk%C3%A9mu%20obil%C3%AD.%20EU%20p%C5%99itom%20nezav%C3%A1d%C3%AD%20omezen%C3%AD%20dovozu%20kv%C5%AFli%20jed%C5%AFm"
+        "query": "Dezinform%C3%A1torsk%C3%A9%20%C5%BEn%C4%9B%20kv%C5%AFli%20ukrajinsk%C3%A9mu%20obil%C3%AD.%20EU%20p%C5%99itom%20nezav%C3%A1d%C3%AD%20omezen%C3%AD%20dovozu%20kv%C5%AFli%20jed%C5%AFm",
+        "version": "v1"
     }
 }

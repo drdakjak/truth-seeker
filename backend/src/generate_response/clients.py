@@ -9,7 +9,7 @@ load_secrets()
 
 def get_model(model_name: str):
     return ChatOpenAI(
-        model=model_name, temperature=0, api_key=os.environ.get("OPENAI_API_KEY")
+        model=model_name, temperature=0.0, api_key=os.environ.get("OPENAI_API_KEY")
     )
 
 
