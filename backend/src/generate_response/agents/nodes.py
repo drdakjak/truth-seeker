@@ -4,14 +4,20 @@ import logging
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.pydantic_v1 import BaseModel, Field
 
-from config import TAVILY_MAX_RESULTS, DEBUG_MODE, MAX_QUERIES, OPENAI_MODEL_NAME_MINI, OPENAI_MODEL_NAME_LARGE
-from clients import get_model, get_tavily
+from config import (
+    SEARCH_ENGINE,
+    SEARCH_MAX_RESULTS,
+    DEBUG_MODE,
+    MAX_QUERIES,
+    OPENAI_MODEL_NAME_MINI,
+    OPENAI_MODEL_NAME_LARGE,
+)
+from clients import get_model, get_tavily, get_exa
 from agents.state import AgentState
 from agents import prompts
 
 MODEL_MINI = get_model(OPENAI_MODEL_NAME_MINI)
 MODEL_LARGE = get_model(OPENAI_MODEL_NAME_LARGE)
-TAVILY = get_tavily()
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO if DEBUG_MODE else logging.ERROR)
@@ -21,16 +27,6 @@ def inject_model(model):
     def decorator(func):
         def wrapper(*args, **kwargs):
             return func(*args, model=model, **kwargs)
-
-        return wrapper
-
-    return decorator
-
-
-def inject_tavily(tavily):
-    def decorator(func):
-        def wrapper(*args, **kwargs):
-            return func(*args, tavily=tavily, **kwargs)
 
         return wrapper
 
@@ -113,16 +109,41 @@ def get_queries(state: AgentState, model):
     return queries
 
 
-@inject_tavily(TAVILY)
-def get_content(state, queries, tavily):
+def search_tavily(query, max_results):
+    tavily = get_tavily()
+    response = tavily.search(query=query, max_results=max_results, include_raw_content=False)
+    return response
+
+
+def search_exa(query, max_results):
+    exa = get_exa()
+    response = exa.search_and_contents(
+        type="keyword",
+        query=query,
+        num_results=max_results,
+        text=True,
+    )
+    return response
+
+
+def get_content(state, queries):
 
     logger.info("Getting content and references")
 
     references = state.get("references") or []
     contents = state.get("content") or []
     ref_num = 0
+
+    if SEARCH_ENGINE == "exa":
+        search_engine = search_exa
+    elif SEARCH_ENGINE == "tavily":
+        search_engine = search_tavily
+    else:
+        raise ValueError("Invalid search")
+    
     for q in queries:
-        response = tavily.search(query=q, max_results=TAVILY_MAX_RESULTS)
+        response = search_engine(query=q, max_results=SEARCH_MAX_RESULTS)
+        
         for r in response["results"]:
             content = {"ref_num": ref_num, "search_query": q, "content": r}
             reference = {"ref_num": ref_num, "title": r["title"], "url": r["url"]}
