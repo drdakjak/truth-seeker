@@ -2,15 +2,23 @@ import os
 
 import boto3
 from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
 from tavily import TavilyClient
 from load_secrets import load_secrets
 
 load_secrets()
 
 def get_model(model_name: str):
-    return ChatOpenAI(
-        model=model_name, temperature=0.0, api_key=os.environ.get("OPENAI_API_KEY")
-    )
+    if 'gpt' in model_name:
+        return ChatOpenAI(
+            model=model_name, temperature=0, api_key=os.environ.get("OPENAI_API_KEY")
+        )
+    elif 'claude' in model_name:
+        return ChatAnthropic(
+            model=model_name, temperature=0, api_key=os.environ.get("ANTHROPIC_API_KEY")
+        ) 
+    else:
+        raise ValueError("Invalid model name")
 
 
 def get_tavily():

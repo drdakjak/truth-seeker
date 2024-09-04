@@ -4,13 +4,21 @@ import logging
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.pydantic_v1 import BaseModel, Field
 
-from config import TAVILY_MAX_RESULTS, DEBUG_MODE, MAX_QUERIES, OPENAI_MODEL_NAME_MINI, OPENAI_MODEL_NAME_LARGE
+from config import (
+    TAVILY_MAX_RESULTS,
+    DEBUG_MODE,
+    MAX_QUERIES,
+    OPENAI_MODEL_NAME_MINI,
+    OPENAI_MODEL_NAME_LARGE,
+    ANTHROPIC_MODEL_NAME,
+)
 from clients import get_model, get_tavily
 from agents.state import AgentState
 from agents import prompts
 
-MODEL_MINI = get_model(OPENAI_MODEL_NAME_MINI)
-MODEL_LARGE = get_model(OPENAI_MODEL_NAME_LARGE)
+ANTHROPIC_MODEL = get_model(ANTHROPIC_MODEL_NAME)
+OPENAI_MODEL = get_model(OPENAI_MODEL_NAME_MINI)
+
 TAVILY = get_tavily()
 
 logger = logging.getLogger()
@@ -70,7 +78,7 @@ def format_content_prompt(contents: list):
     return f"This is the content:\n{format_content(contents)}\n\n"
 
 
-@inject_model(model=MODEL_MINI)
+@inject_model(model=ANTHROPIC_MODEL)
 def get_outline(state: AgentState, model):
     logger.info("Getting outline")
     messages = [
@@ -94,7 +102,7 @@ class Queries(BaseModel):
     queries: List[str] = Field(description="list of seraech queries")
 
 
-@inject_model(model=MODEL_MINI)
+@inject_model(model=OPENAI_MODEL)
 def get_queries(state: AgentState, model):
 
     logger.info("Getting queries")
@@ -149,7 +157,7 @@ class Controversies(BaseModel):
     )
 
 
-@inject_model(model=MODEL_MINI)
+@inject_model(model=OPENAI_MODEL)
 def get_controversies(state: AgentState, model):
 
     logger.info("Getting controversies")
@@ -174,7 +182,7 @@ def content_analyzer_node(state: AgentState):
     return {"controversies": controversies}
 
 
-@inject_model(model=MODEL_MINI)
+@inject_model(model=OPENAI_MODEL)
 def get_draft(state: AgentState, model):
 
     logger.info("Getting draft")
