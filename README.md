@@ -1,11 +1,20 @@
 # Truth Seeker Application
 
-This repository contains a serverless application designed to generate responses based on user's queries for fact-checking and information verification. The application uses OpenAI and Tavily API along with AWS Lambda, AWS Secrets Manager, and AWS Amplify to provide a scalable and secure solution.
+Welcome to the Truth Seeker Application repository. This serverless application is designed to generate reliable responses based on user queries, focusing on fact-checking and information verification. Leveraging technologies such as OpenAI and Tavily API, combined with the robust infrastructure of AWS Lambda, AWS Secrets Manager, and AWS Amplify, this application ensures a scalable, secure, and efficient solution.
+
 
 [<img src="./truth-seeker.png" height="320">](./truth-seeker.png)
 [<img src="./truth-seeker-response.png" height="320">](./truth-seeker-response.png)
 
-It implements a simple agent using [LangGraph](https://langchain-ai.github.io/langgraph/) that searches the internet, gathers information related to the user's query, and generates an article.
+
+
+## Key Features
+
+- **Serverless Architecture**: Utilizes AWS Lambda for scalable and cost-effective compute power.
+- **Secure Data Management**: Employs AWS Secrets Manager for secure handling of sensitive information.
+- **Modern Frontend**: Built with AWS Amplify for seamless deployment and hosting.
+- **Advanced AI Integration**: Integrates OpenAI and Tavily API for  query processing and response generation.
+- **Automated Information Gathering**: Implements a agent using [LangGraph](https://langchain-ai.github.io/langgraph/) to search the internet, gather relevant information, and generate comprehensive articles.
 
 [<img src="./agent-graph.png" height="320">](./agent-graph.png)
 

@@ -4,7 +4,13 @@ import logging
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.pydantic_v1 import BaseModel, Field
 
-from config import TAVILY_MAX_RESULTS, DEBUG_MODE, MAX_QUERIES, OPENAI_MODEL_NAME_MINI, OPENAI_MODEL_NAME_LARGE
+from config import (
+    TAVILY_MAX_RESULTS,
+    DEBUG_MODE,
+    MAX_QUERIES,
+    OPENAI_MODEL_NAME_MINI,
+    OPENAI_MODEL_NAME_LARGE,
+)
 from clients import get_model, get_tavily
 from agents.state import AgentState
 from agents import prompts
@@ -51,23 +57,25 @@ def format_controversies_prompt(controversies: list):
     return f"Here are the controversies found:\n{controversies_str}\n\n"
 
 
-def format_content_entry(content: dict):
-
+def format_content_entry(content: dict, use_raw_content: bool):
+    content_key = "raw_content" if use_raw_content else "content"
     formated_entry = f"REFERENCE NUMBER: {content['ref_num']}\n"
     formated_entry += f"SEARCH QUERY: {content['search_query']}\n"
     formated_entry += (
-        f"CONTENT:\n{content['content']['title']}\n{content['content']['content']}"
+        f"CONTENT:\n{content['content']['title']}\n{content['content'][content_key]}"
     )
     return formated_entry
 
 
-def format_content(contents: list):
-    content = "\n-------------------\n".join(map(format_content_entry, contents))
+def format_content(contents: list, use_raw_content: bool):
+    content = "\n-------------------\n".join(
+        map(lambda x: format_content_entry(x, use_raw_content), contents)
+    )
     return content
 
 
-def format_content_prompt(contents: list):
-    return f"This is the content:\n{format_content(contents)}\n\n"
+def format_content_prompt(contents: list, use_raw_content: bool = False):
+    return f"Content to use:\n{format_content(contents, use_raw_content)}\n\n"
 
 
 @inject_model(model=MODEL_MINI)
@@ -122,9 +130,16 @@ def get_content(state, queries, tavily):
     contents = state.get("content") or []
     ref_num = 0
     for q in queries:
-        response = tavily.search(query=q, max_results=TAVILY_MAX_RESULTS)
+        response = tavily.search(
+            query=q, max_results=TAVILY_MAX_RESULTS, include_raw_content=True
+        )
         for r in response["results"]:
-            content = {"ref_num": ref_num, "search_query": q, "content": r}
+            content = {
+                "ref_num": ref_num,
+                "search_query": q,
+                "content": r,
+                "raw_content": r["raw_content"],
+            }
             reference = {"ref_num": ref_num, "title": r["title"], "url": r["url"]}
             contents.append(content)
             references.append(reference)
@@ -155,7 +170,9 @@ def get_controversies(state: AgentState, model):
     logger.info("Getting controversies")
 
     user_promp = format_task_prompt(state["task"])
-    user_promp += format_content_prompt(state["content"])
+    user_promp += format_content_prompt(
+        state["content"], use_raw_content=state["config"]["use_raw_content"]
+    )
     controversies = model.with_structured_output(Controversies).invoke(
         [
             SystemMessage(content=prompts.CONTROVERSIES_PROMPT),
@@ -180,11 +197,13 @@ def get_draft(state: AgentState, model):
     logger.info("Getting draft")
 
     language = state["target_language"]
-    content = format_content(state["content"])
+    content = format_content_prompt(
+        state["content"], use_raw_content=state["config"]["use_raw_content"]
+    )
     draft_promp = prompts.WRITER_PROMPT.format(content=content, language=language)
 
     user_prompt = format_task_prompt(state["task"])
-    user_prompt += format_outline_prompt(state["outline"])
+    # user_prompt += format_outline_prompt(state["outline"])
     user_prompt += format_controversies_prompt(state["controversies"])
 
     messages = [SystemMessage(content=draft_promp), HumanMessage(content=user_prompt)]

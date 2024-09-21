@@ -71,5 +71,4 @@ DO NOT make any new. Use the numbers provided with each content.
 
 Do not include a references section.
 
-Content to use:
 {content}"""
