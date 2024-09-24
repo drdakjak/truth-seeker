@@ -1,6 +1,6 @@
 # Truth Seeker
 
-Welcome to the Truth Seeker Application repository. This serverless application is designed to generate reliable responses based on user queries, focusing on fact-checking and information verification. Leveraging technologies such as OpenAI and Tavily API, combined with the robust infrastructure of AWS Lambda, AWS Secrets Manager, and AWS Amplify, this application ensures a scalable, secure, and efficient solution.
+"Truth Seeker" is a serverless application designed to generate reliable responses based on user queries, focusing on fact-checking and information verification. Leveraging technologies such as OpenAI and Tavily API, combined with the robust infrastructure of AWS Lambda, AWS Secrets Manager, and AWS Amplify, this application ensures a scalable, secure, and efficient solution.
 
 
 [<img src="./truth-seeker.png" height="320">](./truth-seeker.png)
